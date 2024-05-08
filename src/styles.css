@@ -22,3 +22,7 @@
 .title:hover .title-cover {
 	@apply opacity-0;
 }
+
+html {
+	scroll-behavior: smooth;
+}
