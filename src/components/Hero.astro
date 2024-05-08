@@ -1,39 +1,58 @@
 ---
-import '../styles.css';
+import "../styles.css";
 ---
 
-<!-- Hero -->
 <div
-  class='flex items-center max-w-[85rem] mx-auto pb-6 px-4 sm:px-20 lg:px-40 h-[calc(100vh-180px)]'
+  class="flex items-center max-w-[85rem] mx-auto pb-6 px-4 sm:px-20 lg:px-40 h-[calc(100vh-180px)]"
 >
-  <div>
-    <p class="transition-color text-lg duration-300 hover:text-slate-600 dark:hover:text-slate-200">
-      Hi, my name is
+  <article class="my-auto pb-8">
+    <p
+      class="block text-md w-[80%] md:w-[85%] sm:text-xl font-medium sm:leading-relaxed text-slate-400"
+    >
+      <span
+        class="transition-color duration-300 hover:text-slate-600 dark:hover:text-slate-200"
+      >
+        Hi, my name is
+      </span>
     </p>
-
-    <h1 class="title relative inline-flex flex-col-reverse sm:flex-row mb-3">
-      <div class="relative inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+    <a class="inline-block text-slate-800">
+      <h1 class="title relative inline-flex flex-col-reverse sm:flex-row mb-3">
+        <div
+          class="relative inline-block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
+        >
           <span class="title-gradient">Jania Vandevoorde</span>
-          <span class="title-cover absolute inset-0 transition-opacity duration-500 print:hidden" aria-hidden="true">
+          <span
+            class="title-cover absolute inset-0 transition-opacity duration-500 print:hidden"
+            aria-hidden="true"
+          >
             Jania Vandevoorde
           </span>
-      </div>
-    </h1>
-  
-    <p class='max-w-lg my-7 text-lg transition-color duration-300 hover:text-slate-600 dark:hover:text-slate-200'>
-      I'm a rising senior studying Computer Science and Statistics at Brown. This summer, I'll be a Software Engineer Intern at MongoDB on the .NET/C# Driver team. 
+        </div>
+      </h1>
+    </a>
+    <p
+      class="block text-md w-[80%] md:w-[85%] sm:text-xl font-medium sm:leading-relaxed text-slate-400"
+    >
+      <span
+        class="transition-color duration-300 hover:text-slate-600 dark:hover:text-slate-200"
+      >
+        I'm a rising senior double majoring in Computer Science and Statistics
+        at Brown University. This summer, I'll be a Software Engineer Intern at
+        MongoDB on the <a
+          class="text-blue-500"
+          href="https://www.mongodb.com/docs/drivers/csharp/current/"
+          >NET/C# Driver team</a
+        >.
+      </span>
     </p>
-    
+    <br />
     <a
-      type='button'
-      class='py-3 px-5 inline-flex justify-center items-center gap-2 rounded-md border-2 border-gray-900 font-semibold text-gray-800 hover:text-white hover:bg-gray-800 hover:border-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 transition-all text-sm'
-      target='_blank'
-      href='/Resume.pdf'
+      type="button"
+      class="py-3 px-5 inline-flex justify-center items-center gap-2 rounded-md border-2 border-gray-900 font-semibold text-gray-800 hover:text-white hover:bg-gray-800 hover:border-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 transition-all text-sm"
+      target="_blank"
+      href="/Resume.pdf"
     >
       Here's my resume!
     </a>
-  </div>
-
-
+  </article>
 </div>
-<!-- End Hero -->
