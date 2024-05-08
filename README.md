@@ -27,4 +27,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser. 
 
 ## Created & Maintained with ♡ by Jania Vandevoorde
 
-Original design inspired by [Abdur Rahman Robin](https://robinrahman.me/).
+- Original site design adapted from [Abdur Rahman Robin](https://robinrahman.me/)
+- Some elements inspired by [Paul Mineev](https://paul.mineev.me/)
