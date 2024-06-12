@@ -1,35 +1,102 @@
-<div id='about' class='max-w-[85rem] mx-auto px-4 pt-32 sm:px-20 lg:px-40'>
-  <h1 class='mb-4 font-bold text-3xl'>About Me</h1>
+<style>
+  /* Custom bullet style using emojis */
+  ul.custom-bullets {
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 1.5rem; /* Adjust the padding for indentation */
+  }
+
+  ul.custom-bullets li {
+    position: relative;
+    padding-left: 2rem; /* Adjust the space between the emoji and text */
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  ul.custom-bullets li:before {
+    content: ''; /* Remove the default content */
+    position: absolute;
+    left: 0;
+    top: 0.2rem; /* Adjust the vertical alignment of the emoji */
+    font-size: 1.2rem; /* Adjust the size of the emoji */
+  }
+
+  /* Define emoji characters as list-style-type */
+  ul.custom-bullets li:nth-child(1):before {
+    content: '🏉'; /* Emoji for Rugby */
+  }
+
+  ul.custom-bullets li:nth-child(2):before {
+    content: '🗺️'; /* Emoji for Travel */
+  }
+
+  ul.custom-bullets li:nth-child(3):before {
+    content: '📖'; /* Emoji for Reading */
+  }
+
+  ul.custom-bullets li:nth-child(4):before {
+    content: '🏃🏼‍♀️'; /* Emoji for Distance Running */
+  }
+
+  ul.custom-bullets li:nth-child(5):before {
+    content: '🧁'; /* Emoji for Desserts */
+  }
+</style>
+
+
+<div id="about" class="max-w-[85rem] mx-auto px-4 pt-32 sm:px-20 lg:px-40">
   <!-- Grid -->
-  <div class='mt-6 grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 items-start'>
+  <div class="mt-6 grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 items-start">
     <!-- Start Col -->
     <div>
       <h1
-        class='block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white'
+        class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white"
       >
       </h1>
-      <p class='mt-3 text-lg text-gray-800 dark:text-gray-400'>
-        Lorem ipsum dolor sit amet. Eum atque soluta sed quia consequatur qui vitae doloremque vel nihil quasi ut incidunt nesciunt et optio consequatur et tempore temporibus. Et fuga voluptates non dolores quia est sapiente mollitia et quia cupiditate est sint aperiam ut commodi voluptatem? Et exercitationem eius est neque quam non labore placeat sed atque modi sit eius aliquam et consequatur officiis id aperiam voluptatibus.        
+      <p class="mt-3 text-lg text-gray-800 dark:text-gray-400">
+        Hi! My name is Jania, and I’m a rising senior at Brown University where
+        I’m a candidate for a B.S. in Computer Science and a B.S. in Statistics.
+        A lot of my courses are data-centric, but I’m very interested in
+        software principles and computer systems. I’m a 5-time Head Teaching
+        Assistant (HTA) in the CS department, where I’ve managed over 100 TAs
+        and developed engaging course content for over 1,000 students.
       </p>
-      <p class='mt-3 text-lg text-gray-800 dark:text-gray-400'>
-        Qui odit accusantium ea voluptas voluptates ut magni esse est voluptates accusantium. Est nobis fugit aut porro voluptate et similique dolores est dolore voluptas hic vero voluptatibus aut doloribus voluptate sed enim repellendus. Ut velit cumque eum nihil modi aut quidem quia qui nihil perspiciatis! Est omnis nemo aut laboriosam quasi qui repellendus excepturi in reiciendis voluptas in quia animi.
+      <p class="mt-3 text-lg text-gray-800 dark:text-gray-400">
+        My passions outside of Computer Science include:
+        <ul class="custom-bullets pl-5 mt-2">
+          <li>Rugby - I'm on the <a
+              class="text-blue-500"
+              href="https://brownbears.com/sports/womens-rugby"
+              >Division I team</a
+            > here at Brown. I've been team captain and I recently won Strength &
+            Conditioning Athlete of the Year.
+          </li>
+          <li>Travel - I've lived in 7 countries and been to over 40. I love exploring new places and getting exposure to all the diverse cultures the world has to offer!
+          </li>
+          <li>Reading - I read 50 books in 2023 and I'm trying to read 30 this
+            year! These range from literary fiction (including the occasional
+            classic) to YA mystery. <a
+              class="text-blue-500"
+              href="https://www.goodreads.com/user/show/152478889-jania-vandevoorde">Here's my Goodreads</a
+            >. I also enjoy collecting books almost as much as reading them!
+          </li>
+          <li>Distance Running - I'm currently training for a half marathon and I
+            hope to run a full marathon after graduation!
+          </li>
+          <li>Desserts - I'm always on the hunt for a good sweet treat! My favorites are warm chocolate chip cookies, raspberry sorbet, and honey cake.
+          </li>
+        </ul>
       </p>
-      <p class='mt-3 text-lg text-gray-800 dark:text-gray-400'>
-        Sed magni rerum et iure omnis ut eveniet delectus est maxime harum vel totam delectus! Ab accusamus officiis ea atque consequatur et voluptatum maiores. 33 nisi dolor est dignissimos quas 33 maxime sunt qui rerum dolores et earum dolore ut dolore consequuntur est galisum molestiae. Nam distinctio vitae ut nisi suscipit et voluptatem quia et quod rerum.
-      </p>
-      
-      
     </div>
     <!-- End Col -->
 
-    <div class='relative md:ml-4'>
+    <div class="relative md:ml-4">
       <img
-        class='w-full rounded-md'
-        src='/Headshot.jpg'
-        alt='Jania Vandevoorde'
+        class="w-full rounded-md"
+        src="/Headshot.jpg"
+        alt="Jania Vandevoorde"
       />
       <div
-        class='absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-md mt-4 -mb-4 mr-4 -ml-4 lg:mt-6 lg:-mb-6 lg:mr-6 lg:-ml-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0'
+        class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-md mt-4 -mb-4 mr-4 -ml-4 lg:mt-6 lg:-mb-6 lg:mr-6 lg:-ml-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0"
       >
       </div>
     </div>
@@ -37,13 +104,3 @@
   </div>
   <!-- End Grid -->
 </div>
-
-<style>
-  .skill::before {
-    content: '▹';
-    position: absolute;
-    left: 0px;
-    font-size: 12px;
-    line-height: 12px;
-  }
-</style>
