@@ -23,6 +23,11 @@
 	@apply opacity-0;
 }
 
+.block-link::after {
+	@apply absolute inset-0 block;
+	content: '';
+}
+
 html {
 	scroll-behavior: smooth;
 }
