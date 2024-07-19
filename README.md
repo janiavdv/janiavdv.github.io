@@ -1,4 +1,4 @@
-# Jania's Homepage
+# 🏠 Jania's Homepage
 
 [![Deploy to GitHub Pages](https://github.com/janiavdv/janiavdv.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/janiavdv/janiavdv.github.io/actions/workflows/deploy.yml)
 
@@ -16,14 +16,19 @@ Clone the repository and run
 npm install
 ```
 
-to install the necessary dependencies. Then, run
+to install the necessary dependencies. To address issues, run
+```
+npm audit fix
+```
+
+Then, run
 
 ```
 npm run dev
 ```
 
-to run the app in the development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser. The page will reload if you make edits.
+to boot the app in the development mode.
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser. The page reloads when you make edits locally.
 
 ## Created & Maintained with ♡ by Jania Vandevoorde
 
