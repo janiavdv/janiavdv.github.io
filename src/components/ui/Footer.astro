@@ -1,0 +1,107 @@
+---
+import { profile } from '../../settings'
+
+const { fullName } = profile
+---
+<div
+  id="footer"
+  class="max-w-[85rem] flex flex-col justify-center items-center mx-auto px-4 pt-28 sm:px-20 lg:px-40 mb-6"
+>
+  <p>Created & Maintained with ♡ by {fullName}.</p>
+  <p id="last-updated">
+	Last updated: <span id="commit-info">Fetching latest commit...</span>
+  </p>
+</div>
+
+<script is:inline>
+  const repoOwner = 'janiavdv';
+  const repoName = 'janiavdv.github.io';
+  const CACHE_KEY = 'github_commit_cache';
+  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+
+  function formatCommitInfo(commitData) {
+    const dateObj = new Date(commitData.date);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const commitDate = dateObj.toLocaleDateString('en-US', options);
+    
+    return `<a href="${commitData.url}" target="_blank" class="text-blue-500 hover:text-blue-700 font-mono">${commitData.hash}</a> on ${commitDate}`;
+  }
+
+  function getCachedCommit() {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        const now = Date.now();
+        
+        if (now - timestamp < CACHE_DURATION) {
+          return data;
+        }
+      }
+    } catch (error) {
+      console.error('Error reading cache:', error);
+    }
+    return null;
+  }
+
+  function setCachedCommit(commitData) {
+    try {
+      const cacheData = {
+        data: commitData,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+    } catch (error) {
+      console.error('Error setting cache:', error);
+    }
+  }
+
+  async function fetchLastCommit() {
+    const commitElement = document.getElementById('commit-info');
+    if (!commitElement) {
+      // If element doesn't exist yet, try again in a bit
+      setTimeout(fetchLastCommit, 100);
+      return;
+    }
+    
+    // Try to get cached data first
+    const cachedCommit = getCachedCommit();
+    if (cachedCommit) {
+      commitElement.innerHTML = formatCommitInfo(cachedCommit);
+      return;
+    }
+
+    try {
+      const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/commits`);
+      const commits = await response.json();
+      const lastCommit = commits[0];
+
+      const commitData = {
+        hash: lastCommit.sha.substring(0, 7),
+        date: lastCommit.commit.author.date,
+        url: lastCommit.html_url
+      };
+
+      setCachedCommit(commitData);
+      commitElement.innerHTML = formatCommitInfo(commitData);
+    } catch (error) {
+      console.error('Error fetching the latest commit:', error);
+      commitElement.innerText = 'Failed to fetch the latest commit';
+    }
+  }
+
+  // Function to initialize the commit fetcher
+  function initCommitFetcher() {
+    fetchLastCommit();
+  }
+
+  // Run on initial load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCommitFetcher);
+  } else {
+    initCommitFetcher();
+  }
+
+  // Also run on Astro page navigation
+  document.addEventListener('astro:page-load', initCommitFetcher);
+</script>

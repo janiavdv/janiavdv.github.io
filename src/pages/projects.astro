@@ -1,0 +1,33 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { projects } from "@/data/resume";
+import {template} from "@/settings";
+
+const ALL_PROJECTS = projects; // This will be replaced with dynamic data later
+---
+
+<Layout title="Projects | Jania Vandevoorde">
+  <div class="max-w-none">
+    <h1 class="text-3xl font-bold mb-8">Technical Projects</h1>
+
+    <div class="space-y-8">
+      {
+        ALL_PROJECTS.map((project) => (
+          <div class="card bg-base-200">
+            <div class="card-body">
+              <h2 class="card-title text-xl">
+                <a href={template.base + project.link} class="hover:text-accent">
+                  {project.title}
+                </a>
+              </h2>
+              <div class="card-actions justify-end mt-4">
+                <a href={project.link} class="btn btn-sm btn-secondary text-secondary-content">
+                  See on GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+</Layout>

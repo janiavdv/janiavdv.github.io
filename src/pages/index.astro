@@ -1,47 +1,56 @@
 ---
-import About from '../components/About.astro'
-import Contact from '../components/Contact.astro'
-import Experience from '../components/Experience.astro'
-import Footer from '../components/Footer.astro'
-import Header from '../components/Header.astro'
-import Hero from '../components/Hero.astro'
-import Projects from '../components/Projects.astro'
+import Layout from '../layouts/Layout.astro'
+
+import { profile } from '@/settings'
+import { projects } from '@/data/resume'
+import { experiences } from '@/data/resume'
+import ProfilePictures from '@/assets/profile_picture.jpg'
+import Hero from '@/components/ui/Hero.astro'
+import Grid from '@/components/ui/Grid.astro'
+
+const { fullName, title, institute, description, interests } = profile
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <link rel='icon' href='/favicon.svg' />
-    <meta name='viewport' content='width=device-width' />
-    <meta name='generator' content={Astro.generator} />
-    <meta name='”robots”' content='index, follow' />
-    <meta
-      name='description'
-      content="I'm Jania Vandevoorde, a developer, student, and athlete. This is my personal website with my experience, projects, and contact information."
-    />
-    <title>Jania Vandevoorde</title>
-  </head>
-  <body>
-    <Header />
-    <main class='bg-linear'>
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <Contact />
-      <Footer />
-    </main>
-  </body>
-  <script src='../../node_modules/preline/dist/preline.js'></script>
-</html>
+<Layout>
+	<!-- Hero Section -->
+	<section class='flex items-center gap-12 border-b pb-12'>
+		<Hero
+			fullName={fullName}
+			title={title}
+			institute={institute}
+			description={description}
+			profilePicture={ProfilePictures}
+		/>
+	</section>
 
-<style>
-  .bg-linear {
-    background: linear-gradient(
-      180deg,
-      hsl(273, 37%, 93%),
-      hsl(273, 37%, 93%),
-      #fdfeff
-    );
-  }
-</style>
+	<!-- Recent Work Experience -->
+	<section class='py-12 border-t'>
+		<Grid gridTitle='Recent Work Experience' gridItems={experiences} />
+		<div class="mt-8 flex justify-center">
+			<a 
+				href="/resume" 
+				class="inline-block px-6 py-2 rounded-full bg-secondary text-white hover:bg-accent transition-colors duration-200 text-center"
+			>
+				More Experience
+			</a>
+		</div>
+	</section>
+
+	<!-- Recent Projects -->
+	<section class='py-12 border-t'>
+		<Grid gridTitle='Recent Projects' gridItems={projects} />
+		<div class="mt-8 flex justify-center">
+			<a 
+				href="/projects" 
+				class="inline-block px-6 py-2 rounded-full bg-secondary text-white hover:bg-accent transition-colors duration-200 text-center"
+			>
+				More Projects
+			</a>
+		</div>
+	</section>
+
+	<!-- Interests -->
+	<section class='py-12 border-b'>
+		<Grid gridTitle='Interests' gridItems={interests} />
+	</section>
+</Layout>
