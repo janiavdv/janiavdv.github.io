@@ -1,10 +1,16 @@
 ---
+import { isSkill } from '@/types/resume';
+
+import type { Skill } from '@/types/resume';
+
 interface Props {
-  gridTitle: string;
-  gridItems: {
+  gridTitle?: string;
+  gridItems: (Skill | {
     title: string;
-    description: string;
-  }[];
+    description?: string;
+    level?: number;
+    company?: string;
+  })[];
 }
 
 const {gridTitle, gridItems} = Astro.props;
@@ -12,12 +18,28 @@ const {gridTitle, gridItems} = Astro.props;
 <h2 class="text-3xl font-bold mb-8">{gridTitle}</h2>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   {gridItems.map((item) => (
-    <div class="p-6 rounded-lg text-base-content bg-base-200">
+    <div class="p-6 rounded-lg text-base-content bg-base-200 group">
       {'company' in item && item.company && (
-        <div class="mb-2 text-sm italic text-base-content/70">{item.company}</div>
+      <div class="mb-2 text-sm italic text-base-content/70">{item.company}</div>
       )}
       <h3 class="text-xl font-semibold mb-3">{item.title}</h3>
-      <p>{item.description}</p>
+      {
+      'level' in item
+        ? (
+        <div class="flex gap-1 w-32 h-3">
+          {
+          Array.from({ length: 5 }).map((_, idx) => (
+            <div
+            class={`flex-1 h-full rounded ${idx < (item.level ?? 0) ? 'bg-secondary group-hover:bg-accent' : 'bg-base-300'}`}
+            ></div>
+          ))
+          }
+        </div>
+        )
+        : (
+        <p>{item.description}</p>
+        )
+      }
     </div>
   ))}
 </div>

@@ -1,41 +1,25 @@
 ---
-import { Image } from 'astro:assets'
-import {profile} from '../../settings'
+import DarkLightController from './DarkLightController.astro'
 import SocialIcons from './SocialIcons.astro'
-import ProfilePictures from '@/assets/profile_picture.jpg'
 import { template } from '@/settings'
 
-const { fullName } = profile
 ---
-<aside
-	class='px-4 pt-4 h-screen w-[20rem] bg-base-200 text-base-content flex flex-col'
->
-	<div class='flex flex-col my-8 justify-between h-full'>
-		<div>
-			<div class='flex justify-center items-center flex-col'>
-				<Image
-					class='mask mask-circle size-44'
-					src={ProfilePictures}
-					alt={`Profile picture of ${fullName}`}
-				/>
-				<h1 class="text-lg font-black mt-8 hidden lg:block"><span>{fullName}</span></h1>
-			</div>
-			<div class='mx-4 mt-16'>
-				<ul class='space-y-4 menu grow shrink menu-md overflow-y-auto'>
-					<li>
-                        <a href={`${template.base}/`} class='text-lg'>Home</a>
-					</li>
-					<li>
-                        <a href={`${template.base}/projects`} class='text-lg'>Projects</a>
-					</li>
-					<li>
-                        <a href={`${template.base}/resume`} class='text-lg'>Resume</a>
-                    </li>
-				</ul>
-			</div>
-		</div>
-		<div class='mx-4'>
-			<SocialIcons/>
+<nav class="w-full h-full mx-auto px-5 max-w-screen-lg flex items-center justify-between py-4 bg-base-100 sticky top-0 z-50">
+	<div class="flex w-full items-center justify-between gap-8">
+		<ul class="flex space-x-8 items-center">
+			<li>
+				<a href={`${template.base}/`} class="text-lg px-3 py-1 rounded-full transition-colors hover:bg-secondary/20">Home</a>
+			</li>
+			<li>
+				<a href={`${template.base}/projects`} class="text-lg px-3 py-1 rounded-full transition-colors hover:bg-secondary/20">Projects</a>
+			</li>
+			<li>
+				<a href={`${template.base}/resume`} class="text-lg px-3 py-1 rounded-full transition-colors hover:bg-secondary/20">Resume</a>
+			</li>
+		</ul>
+		<div class="flex items-center gap-6">
+			<SocialIcons />
+			<DarkLightController />
 		</div>
 	</div>
-</aside>
+</nav>

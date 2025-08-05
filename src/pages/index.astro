@@ -25,11 +25,11 @@ const { fullName, title, institute, description, interests } = profile
 
 	<!-- Recent Work Experience -->
 	<section class='py-12 border-t'>
-		<Grid gridTitle='Recent Work Experience' gridItems={experiences} />
+		<Grid gridTitle='Recent Work Experience' gridItems={experiences.slice(0, 3)} />
 		<div class="mt-8 flex justify-center">
 			<a 
 				href="/resume" 
-				class="inline-block px-6 py-2 rounded-full bg-secondary text-white hover:bg-accent transition-colors duration-200 text-center"
+				class=" "
 			>
 				More Experience
 			</a>
@@ -38,7 +38,7 @@ const { fullName, title, institute, description, interests } = profile
 
 	<!-- Recent Projects -->
 	<section class='py-12 border-t'>
-		<Grid gridTitle='Recent Projects' gridItems={projects} />
+		<Grid gridTitle='Recent Projects' gridItems={projects.slice(0, 3)} />
 		<div class="mt-8 flex justify-center">
 			<a 
 				href="/projects" 
@@ -50,7 +50,9 @@ const { fullName, title, institute, description, interests } = profile
 	</section>
 
 	<!-- Interests -->
-	<section class='py-12 border-b'>
-		<Grid gridTitle='Interests' gridItems={interests} />
-	</section>
+	{interests.length > 0 && (
+		<section class='py-12 border-b'>
+			<Grid gridTitle='Interests' gridItems={interests} />
+		</section>
+	)}
 </Layout>

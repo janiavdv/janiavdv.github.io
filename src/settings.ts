@@ -2,9 +2,8 @@ export const profile = {
 	fullName: 'Jania Vandevoorde',
 	title: 'Computer Science Master\'s Student',
 	institute: 'the University of Michigan',
-	description: 'TODO',
+	description: 'Recent graduate with a dual degree in Computer Science and Statistics from Brown University, now pursuing my Master\'s. Passionate about working with, for, and through data. Interested in roles like Data Engineering, Machine Learning, and Data-Focused Software Engineering.',
 	interests: [
-		{ title: 'Reading', description: 'Description' },
 	],
 }
 

@@ -14,14 +14,16 @@ const { elements, colored } = Astro.props
 	class='timeline timeline-snap-icon max-md:timeline-compact timeline-vertical'
 >
 	{
-		elements.map((element, index) => (
-			<li>
-				<div class='timeline-middle'>
+	elements.map((element, index) => {
+		const isLeft = index % 2 === 0;
+		return (
+			<li class="group transition-transform duration-200 cursor-pointer">
+				<div class='timeline-middle group-hover:bg-accent transition-colors duration-200 rounded-full'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						viewBox='0 0 20 20'
 						fill='currentColor'
-            class:list={[{ 'text-accent': colored }, 'h-5 w-5']}
+						class:list={[{ 'text-secondary': colored }, 'h-5 w-5', 'group-hover:text-white transition-colors duration-200']}
 					>
 						<path
 							fill-rule='evenodd'
@@ -31,16 +33,31 @@ const { elements, colored } = Astro.props
 					</svg>
 				</div>
 				<div
-					class={`${index % 2 === 0 ? 'timeline-start' : 'timeline-end'} mb-10 md:text-end`}
+					class={`
+						${isLeft ? 'timeline-start' : 'timeline-end'} mb-8
+						${isLeft ? 'text-right md:text-right' : 'text-left md:text-left'}
+						group-hover:scale-105 transition-transform duration-200
+						${isLeft ? 'pr-2 md:pr-4' : 'pl-2 md:pl-4'}
+					`}
 				>
 					<time class='font-mono italic'>{element.time}</time>
-					<div class='text-lg font-black'>{isExperience(element) ? element.title : element.degree}</div>
-					<div>{element.description}</div>
-					<div>{isExperience(element) ? element.company : element.school}</div>
-					<div>{element.location}</div>
+					{element.link ? (
+						<a href={element.link} target="_blank" rel="noopener noreferrer" class="block hover:underline focus:underline">
+							<div class='text-lg font-black'>
+								{isExperience(element) ? element.title : element.degree}
+							</div>
+						</a>
+					) : (
+						<div class='text-lg font-black'>
+							{isExperience(element) ? element.title : element.degree}
+						</div>
+					)}
+					<div>{isExperience(element) ? element.company : element.school} · {element.location}</div>
+					<div class='text-gray-600'>{element.description}</div>
 				</div>
-        <hr class:list={[{ 'bg-accent': colored }]} />
+				<hr class:list={[{ 'bg-secondary': colored }, 'transition-colors duration-200', 'group-hover:bg-accent']} />
 			</li>
-		))
+		)
+	})
 	}
 </ul>

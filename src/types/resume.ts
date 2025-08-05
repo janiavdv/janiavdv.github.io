@@ -4,6 +4,7 @@ export interface Experience {
   title: string;
   location?: string;
   description?: string;
+  link?: string;
 }
 
 export interface Education {
@@ -12,11 +13,12 @@ export interface Education {
   degree: string;
   location?: string;
   description?: string;
+  link?: string;
 }
 
 export interface Skill {
   title: string;
-  description: string;
+  level: number; // e.g., from 1 to 5
 }
 
 export interface Project {
@@ -29,4 +31,9 @@ export interface Project {
 // Function to check if an element is of type Experience or Education
 export function isExperience(element: Experience | Education): element is Experience {
   return 'title' in element && 'company' in element;
+}
+
+// Function to check if an element is of type Skill
+export function isSkill(element: Skill): element is Skill {
+  return 'level' in element && 'title' in element;
 }

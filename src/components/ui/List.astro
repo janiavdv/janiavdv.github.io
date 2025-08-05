@@ -3,7 +3,8 @@ interface Props {
   listTitle: string;
   listItems: {
     title: string;
-    description: string;
+    description?: string;
+    level?: number
   }[];
 }
 const {listTitle, listItems} = Astro.props

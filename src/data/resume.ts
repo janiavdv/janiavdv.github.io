@@ -5,6 +5,7 @@ export const experiences = [
 		title: 'Software Engineer Intern',
 		location: 'New York, NY',
 		description: 'C# Driver',
+		link: 'https://www.mongodb.com'
 	},
 	{
 		company: 'MongoDB',
@@ -12,13 +13,31 @@ export const experiences = [
 		title: 'Software Engineer Intern',
 		location: 'New York, NY',
 		description: 'Cloud Insights and Telemetry',
+		link: 'https://www.mongodb.com'
 	},
 	{
 		company: 'Brown University',
 		time: 'October 2022 - May 2025',
 		title: 'Head Teaching Assistant',
 		location: 'Providence, RI',
-		description: 'Description here',
+		description: 'Machine Learning, Data Structures, Discrete Mathematics',
+		link: 'https://cs.brown.edu/'
+	},
+	{
+		company: 'Takachar',
+		time: 'January 2024',
+		title: 'Data Science Intern',
+		location: 'Remote',
+		description: '',
+		link: 'https://www.takachar.com/'
+	},
+	{
+		company: 'Brush Creek Ranch',
+		time: 'May 2023 - August 2023',
+		title: 'Server (P.M.)',
+		location: 'Saratoga, WY',
+		description: 'Fine dining service in a luxury resort',
+		link: 'https://www.brushcreekranch.com/'
 	},
 ];
 
@@ -29,6 +48,7 @@ export const education = [
 		degree: 'Sc.B. Computer Science',
 		location: 'Providence, RI',
 		description: '',
+		link: 'https://cs.brown.edu/'
 	},
 	{
 		school: 'Brown University',
@@ -36,6 +56,7 @@ export const education = [
 		degree: 'Sc.B. Statistics',
 		location: 'Providence, RI',
 		description: '',
+		link: 'https://biostatistics.sph.brown.edu/academics/concentration-statistics'
 	},
 	{
 		school: 'University of Michigan',
@@ -43,21 +64,86 @@ export const education = [
 		degree: 'M.S. Computer Science and Engineering',
 		location: 'Ann Arbor, MI',
 		description: '',
+		link: 'https://cse.engin.umich.edu/academics/graduate/graduate-programs/masters-in-cse/'
 	},
 ];
 
 export const skills = [
 	{
 		title: 'Python',
-		description: 'Spectroscopy, Isolation of Radioactive Elements, Radiation Measurement',
+		level: 5,
 	},
+	{
+		title: 'Java',
+		level: 5,
+	},
+
+	{
+		title: 'SQL',
+		level: 5,
+	},
+	{ 
+		title: "R",
+		level: 5,
+	},
+	{
+		title: 'C#',
+		level: 4,
+	},
+	{
+		title: 'C/C++',
+		level: 3,
+	},
+	{
+		title: 'JavaScript/TypeScript',
+		level: 3,
+	},
+	{
+		title: 'HTML/CSS',
+		level: 3,
+	},
+	{
+		title: 'React',
+		level: 3,
+	},
+
 ];
 
 export const projects = [
 	{
-		title: 'The Radiation of Uranium Compounds',
-		description: 'A groundbreaking study on the radioactive properties of uranium compounds.',
-		time: '1898',
-		link: '#',
+		title: 'NeurANIL',
+		description: 'Meta-learning model in PyTorch to decode neural signals',
+		time: '2025',
+		link: 'https://github.com/Yishu-Li/NeuraNIL',
 	},
+	{
+		title: 'Colorizer',
+		description: 'Grayscale image colorization using a Convolutional Neural Network with a U-Net architecture',
+		time: '2024',
+		link: 'https://github.com/janiavdv/colorizer',
+	},
+	{
+		title: 'Risk Score Research',
+		description: 'R package to estimate integer risk score model coefficients using randomized rounding, logistic regression, and cyclical coordinate descent',
+		time: '2024',
+		link: 'https://github.com/hjeglinton/riskscores',
+	},
+	{
+		title: 'Scrappy',
+		description: 'Scrapbook-style social media web app that combines the ability to share content with friends and document personal memories',
+		time: '2023',
+		link: 'https://github.com/janiavdv/scrappy'
+	},
+	{
+		title: 'Data Spirits',
+		description: 'Analysis of the correlation between alcohol consumption and sports betting volume using machine learning for data interpolation and predictive modeling',
+		time: '2024',
+		link: 'https://github.com/janiavdv/data-spirits'
+	},
+	{
+		title: 'WeensyOS Model',
+		description: 'Operating system model in a formal methods language, including pagetables, memory allocation, and system calls',
+		time: '2023',
+		link: 'https://github.com/janiavdv/lfs-weensyos'
+	}
 ];
