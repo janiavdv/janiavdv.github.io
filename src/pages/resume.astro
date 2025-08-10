@@ -1,0 +1,138 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import {
+  experiences,
+  education,
+  languages,
+  technologies,
+  projects,
+} from "../data/resume";
+import ResumeTimeline from "@/components/ui/ResumeTimeline.astro";
+
+import type { Experience, Education } from "../types/resume";
+import Grid from "@/components/ui/Grid.astro";
+
+let orderedExperiences: Experience[] = [];
+let orderedEducations: Education[] = [];
+
+const orderElement = <T extends { time: string }>(a: T, b: T) => {
+  const presentValues = ["present", "now", "current", "today"];
+  if (
+    presentValues.includes(
+      (a["time"] as string)?.split(" - ")[1]?.toLowerCase()
+    )
+  ) {
+    // If the date is 'present', it should be the first element
+    return -1;
+  }
+  const dateA = new Date((a["time"] as string)?.split(" - ")[1]);
+  const dateB = new Date((b["time"] as string)?.split(" - ")[1]);
+  return dateB.getTime() - dateA.getTime();
+};
+
+if (experiences.length > 0) {
+  orderedExperiences = experiences.sort((a, b) => {
+    return orderElement(a, b);
+  });
+}
+
+if (education.length > 0) {
+  orderedEducations = education.sort((a, b) => {
+    return orderElement(a, b);
+  });
+}
+---
+
+<Layout title="Resume | Jania Vandevoorde">
+  <div class="max-w-3xl mx-auto">
+    {
+      orderedEducations.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold mb-6 border-b pb-2 text-left">
+            Education
+          </h2>
+          <ResumeTimeline elements={orderedEducations} colored={true} />
+        </section>
+      )
+    }
+
+    {
+      orderedExperiences.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold mb-6 border-b pb-2 text-left">
+            Experiences
+          </h2>
+          <div id="experiences-container">
+            <ResumeTimeline
+              elements={orderedExperiences.slice(0, 4)}
+              colored={true}
+            />
+            {orderedExperiences.length > 4 && (
+              <div id="hidden-experiences" class="hidden">
+                <ResumeTimeline
+                  elements={orderedExperiences.slice(4)}
+                  colored={true}
+                />
+              </div>
+            )}
+          </div>
+          {orderedExperiences.length > 4 && (
+            <div class="text-center mt-6">
+              <button
+                id="toggle-experiences-btn"
+                data-more={`Show All Experiences (${orderedExperiences.length - 4} more)`}
+                data-less={`Show Less`}
+                class="inline-block px-6 py-2 rounded-full bg-secondary text-white hover:bg-accent transition-colors duration-200 text-center"
+              >
+                Show All Experiences ({orderedExperiences.length - 4} more)
+              </button>
+            </div>
+          )}
+        </section>
+      )
+    }
+    {
+      languages.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold mb-6 border-b pb-2 text-left">
+            Programming Languages
+          </h2>
+          <Grid gridTitle={undefined} gridItems={languages} />
+        </section>
+      )
+    }
+    {
+      technologies.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold mb-6 border-b pb-2 text-left">
+            Technologies
+          </h2>
+          <Grid gridTitle={undefined} gridItems={technologies} />
+        </section>
+      )
+    }
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById("toggle-experiences-btn");
+    const hiddenExperiences = document.getElementById("hidden-experiences");
+    if (toggleBtn && hiddenExperiences) {
+      let isExpanded = false;
+      const moreText = toggleBtn.getAttribute("data-more");
+      const lessText = toggleBtn.getAttribute("data-less");
+      const updateButton = () => {
+        toggleBtn.textContent = isExpanded ? lessText : moreText;
+      };
+      toggleBtn.addEventListener("click", () => {
+        isExpanded = !isExpanded;
+        hiddenExperiences.classList.toggle("hidden", !isExpanded);
+        updateButton();
+      });
+      // Ensure correct initial state
+      hiddenExperiences.classList.add("hidden");
+      updateButton();
+    }
+  });
+</script>

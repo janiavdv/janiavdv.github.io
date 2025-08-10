@@ -1,0 +1,14 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { projects } from "@/data/resume";
+import Grid from "@/components/ui/Grid.astro";
+
+const ALL_PROJECTS = projects;
+---
+
+<Layout title="Projects | Jania Vandevoorde">
+  <div class="max-w-none">
+    <h1 class="text-3xl font-bold mb-8">Technical Projects</h1>
+    <Grid gridItems={ALL_PROJECTS} />
+  </div>
+</Layout>

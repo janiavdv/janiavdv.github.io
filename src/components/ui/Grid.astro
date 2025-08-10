@@ -1,0 +1,85 @@
+---
+import type { Skill } from "@/types/resume";
+
+interface Props {
+  gridTitle?: string;
+  gridItems: (
+    | Skill
+    | {
+        title: string;
+        description?: string;
+        level?: number;
+        company?: string;
+      }
+  )[];
+}
+
+const { gridTitle, gridItems } = Astro.props;
+---
+
+<h2 class="text-3xl font-bold mb-8">{gridTitle}</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {
+    gridItems.map((item) => {
+      const isProject = !("level" in item) && !("company" in item);
+      const content = (
+        <>
+          {"company" in item && item.company && (
+            <div class="mb-2 text-base italic text-base-content/70 group-hover:underline">
+              {item.company}
+            </div>
+          )}
+          <h3 class="text-xl font-bold mb-4 tracking-tight flex items-center gap-2 group-hover:text-secondary">
+            {item.title}
+            {isProject && (
+              <span class="ml-auto flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-6 h-6 inline-block text-base-content/70 group-hover:text-secondary"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.203 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.337 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .268.18.579.688.481C19.138 20.2 22 16.447 22 12.021 22 6.484 17.523 2 12 2z" />
+                </svg>
+              </span>
+            )}
+          </h3>
+          {"time" in item && item.time && (
+            <div class="mb-3 text-sm font-medium text-base-content/60">
+              {item.time}
+            </div>
+          )}
+          {"level" in item && item.level ? (
+            <div class="flex gap-2 w-40 h-4 mb-3">
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <div
+                  class={`flex-1 h-3 rounded-lg transition-colors duration-200 ${idx < (item.level ?? 0) ? "bg-secondary group-hover:bg-accent" : "bg-base-300"}`}
+                />
+              ))}
+            </div>
+          ) : (
+            "description" in item &&
+            item.description && (
+              <div class="text-gray-600">{item.description}</div>
+            )
+          )}
+        </>
+      );
+
+      return "link" in item && item.link ? (
+        <a
+          href={typeof item.link === "string" ? item.link : undefined}
+          class="p-6 rounded-lg text-base-content bg-base-200 group transition-transform duration-200 hover:scale-105 hover:shadow-lg block"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {content}
+        </a>
+      ) : (
+        <div class="p-6 rounded-lg text-base-content bg-base-200 group transition-transform duration-200 hover:scale-105 hover:shadow-lg">
+          {content}
+        </div>
+      );
+    })
+  }
+</div>

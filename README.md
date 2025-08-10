@@ -5,8 +5,8 @@
 A [portfolio website](https://janiavdv.github.io/) built with the following technologies:
 
 - 👩🏼‍🚀 [Astro](https://astro.build/)
-- 🪡 [TailwindCSS](https://tailwindcss.com/)
-- 🔅 [Preline UI](https://preline.co/)
+- 🪡 [Tailwind CSS](https://tailwindcss.com/)
+- 🌼 [daisyUI](https://daisyui.com/)
 
 ## Run on your machine
 
@@ -28,9 +28,8 @@ npm run dev
 ```
 
 to boot the app in the development mode.
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser. The page reloads when you make edits locally.
+Open [http://localhost:4321](http://localhost:4321) to view it in your browser. The page reloads when you make edits locally.
 
 ## Created & Maintained with ♡ by Jania Vandevoorde
 
-- Original site design adapted from [Abdur Rahman Robin](https://robinrahman.me/)
-- Some elements inspired by [Paul Mineev](https://paul.mineev.me/)
+- Original site design adapted from [Astro Academia](https://github.com/maiobarbero/astro_academia/tree/demo)

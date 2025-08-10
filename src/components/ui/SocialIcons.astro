@@ -1,0 +1,50 @@
+---
+import Envelope from "@/assets/social-icons/envelope.svg";
+import GitHub from "@/assets/social-icons/github.svg";
+import LinkedIn from "@/assets/social-icons/linkedin-in.svg";
+
+import { social } from "@/settings";
+
+const iconSize = "size-6";
+const containerSize = "size-12";
+---
+
+<div class="flex flex-wrap justify-between items-center">
+  <!-- Email -->
+  {
+    social.email !== "" && (
+      <a
+        href={`mailto:${social.email}`}
+        class={`${containerSize} inline-flex items-center justify-center rounded-xl hover:bg-secondary/20 transition-all duration-300`}
+      >
+        <Envelope class={iconSize} fill="currentColor" />
+      </a>
+    )
+  }
+
+  <!-- GitHub -->
+  {
+    social.github !== "" && (
+      <a
+        href={social.github}
+        target="_blank"
+        class={`${containerSize} inline-flex items-center justify-center rounded-xl hover:bg-secondary/20 transition-all duration-300`}
+      >
+        <GitHub class={iconSize} fill="currentColor" />
+      </a>
+    )
+  }
+
+  <!-- Linkedin -->
+  {
+    social.linkedin !== "" && (
+      <a
+        href={social.linkedin}
+        target="_blank"
+        class={`${containerSize} inline-flex items-center justify-center rounded-xl hover:bg-secondary/20 transition-all duration-300`}
+      >
+        <LinkedIn class={iconSize} fill="currentColor" />
+      </a>
+    )
+  }
+</div>
