@@ -12,7 +12,7 @@ export interface Education {
   time: string;
   degree: string;
   location?: string;
-  description?: string;
+  courses?: string;
   link?: string;
 }
 
@@ -29,11 +29,13 @@ export interface Project {
 }
 
 // Function to check if an element is of type Experience or Education
-export function isExperience(element: Experience | Education): element is Experience {
-  return 'title' in element && 'company' in element;
+export function isExperience(
+  element: Experience | Education
+): element is Experience {
+  return "title" in element && "company" in element;
 }
 
 // Function to check if an element is of type Skill
 export function isSkill(element: Skill): element is Skill {
-  return 'level' in element && 'title' in element;
+  return "level" in element && "title" in element;
 }

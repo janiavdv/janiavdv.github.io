@@ -1,64 +1,66 @@
 ---
-import {template} from '@/settings'
+import { template } from "@/settings";
 interface Props {
-	title: string
-	description: string
-	image: string
+  title: string;
+  description: string;
+  image: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image } = Astro.props
+const { title, description, image } = Astro.props;
 ---
 
-<meta charset='utf-8' />
-<meta name='viewport' content='width=device-width,initial-scale=1' />
-<link
-	rel='icon'
-	type='image/svg+xml'
-	href='/favicon.svg'
-/>
-<meta name='generator' content={Astro.generator} />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
 
 <!-- Sitemap -->
 <link rel="sitemap" href={`${template.base}/sitemap-index.xml`} />
 
 <!-- Canonical URL -->
-<link rel='canonical' href={canonicalURL} />
+<link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
-<meta name='title' content={title} />
-<meta name='description' content={description} />
+<meta name="title" content={title} />
+<meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property='og:type' content='website' />
-<meta property='og:title' content={title} />
-<meta property='og:description' content={description} />
-<meta property='og:image' content={new URL(image, Astro.url)} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
 
 <!-- Theme selector scripts -->
-<script is:inline define:vars={{lightTheme: template.lightTheme, darkTheme: template.darkTheme}}>
+<script
+  is:inline
+  define:vars={{
+    lightTheme: template.lightTheme,
+    darkTheme: template.darkTheme,
+  }}
+>
   // Always use cupcake as default, only switch to dark theme when toggled
-  const isDarkMode = localStorage.getItem('theme') === darkTheme;
+  const isDarkMode = localStorage.getItem("theme") === darkTheme;
   const theme = isDarkMode ? darkTheme : lightTheme;
-  
+
   // Apply theme immediately to prevent flash
-  document.documentElement.setAttribute('data-theme', theme);
+  document.documentElement.setAttribute("data-theme", theme);
 
   // Re-apply theme after navigation
-  document.addEventListener('astro:after-swap', () => {
-    const currentIsDarkMode = localStorage.getItem('theme') === darkTheme;
+  document.addEventListener("astro:after-swap", () => {
+    const currentIsDarkMode = localStorage.getItem("theme") === darkTheme;
     const currentTheme = currentIsDarkMode ? darkTheme : lightTheme;
-    document.documentElement.setAttribute('data-theme', currentTheme);
+    document.documentElement.setAttribute("data-theme", currentTheme);
   });
 </script>
 <script>
-	import { themeChange } from 'theme-change'
-	themeChange()
+  import { themeChange } from "theme-change";
+  themeChange();
 
   // Re-initialize after Astro view transitions
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener("astro:after-swap", () => {
     themeChange(false); // false = don't persist to localStorage
   });
 </script>
