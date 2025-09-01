@@ -11,8 +11,11 @@ import { template } from "@/settings";
     <!-- Mobile Hamburger -->
     <button
       id="menu-toggle"
+      type="button"
       class="md:hidden flex items-center px-2 py-1 rounded transition-colors hover:bg-secondary/20"
       aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
     >
       <svg
         class="w-6 h-6"
@@ -87,59 +90,95 @@ import { template } from "@/settings";
       >
     </li>
   </ul>
-
-  <script is:inline>
-    const btn = document.getElementById("menu-toggle");
-    const menu = document.getElementById("mobile-menu");
-
-    function openMenu() {
-      menu.classList.remove("hidden");
-      requestAnimationFrame(() => {
-        menu.classList.add("flex");
-        menu.classList.remove("opacity-0", "scale-y-95");
-        menu.classList.add("opacity-100", "scale-y-100");
-      });
-    }
-
-    function closeMenu() {
-      menu.classList.remove("opacity-100", "scale-y-100");
-      menu.classList.add("opacity-0", "scale-y-95");
-
-      // wait for animation to finish before hiding
-      setTimeout(() => {
-        menu.classList.remove("flex");
-        menu.classList.add("hidden");
-      }, 200); // match duration-200
-    }
-
-    function isMenuOpen() {
-      return (
-        menu.classList.contains("flex") &&
-        menu.classList.contains("opacity-100")
-      );
-    }
-
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (isMenuOpen()) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
-    // Close when clicking outside
-    document.addEventListener("click", (e) => {
-      if (isMenuOpen() && !menu.contains(e.target) && !btn.contains(e.target)) {
-        closeMenu();
-      }
-    });
-
-    // Close when clicking a link inside the menu
-    menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        closeMenu();
-      });
-    });
-  </script>
 </nav>
+
+<script is:global>
+  // Abort previous listeners if this script is injected multiple times
+  window.__navAbort?.abort();
+  const controller = new AbortController();
+  window.__navAbort = controller;
+
+  const DURATION = 200; // must match duration-200
+
+  function getEls() {
+    return {
+      btn: document.getElementById("menu-toggle"),
+      menu: document.getElementById("mobile-menu"),
+    };
+  }
+
+  function openMenu(menu, btn) {
+    if (!menu) return;
+    menu.classList.remove("hidden");
+    requestAnimationFrame(() => {
+      menu.classList.add("flex");
+      menu.classList.remove("opacity-0", "scale-y-95");
+      menu.classList.add("opacity-100", "scale-y-100");
+    });
+    if (btn) btn.setAttribute("aria-expanded", "true");
+  }
+
+  function closeMenu(menu, btn) {
+    if (!menu) return;
+    menu.classList.remove("opacity-100", "scale-y-100");
+    menu.classList.add("opacity-0", "scale-y-95");
+    setTimeout(() => {
+      menu.classList.remove("flex");
+      menu.classList.add("hidden");
+    }, DURATION);
+    if (btn) btn.setAttribute("aria-expanded", "false");
+  }
+
+  function isMenuOpen(menu) {
+    return menu?.classList.contains("flex") && menu?.classList.contains("opacity-100");
+  }
+
+  // Toggle via event delegation (survives DOM swaps)
+  document.addEventListener("click", (e) => {
+    const toggle = e.target.closest("#menu-toggle");
+    if (!toggle) return;
+
+    const { menu } = getEls();
+    if (!menu) return;
+
+    if (isMenuOpen(menu)) {
+      closeMenu(menu, toggle);
+    } else {
+      openMenu(menu, toggle);
+    }
+  }, { signal: controller.signal });
+
+  // Close when clicking outside
+  document.addEventListener("click", (e) => {
+    const { btn, menu } = getEls();
+    if (!btn || !menu) return;
+
+    if (isMenuOpen(menu) && !menu.contains(e.target) && !btn.contains(e.target)) {
+      closeMenu(menu, btn);
+    }
+  }, { signal: controller.signal });
+
+  // Close when clicking a link inside the menu
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("#mobile-menu a");
+    if (!link) return;
+    const { btn, menu } = getEls();
+    closeMenu(menu, btn);
+  }, { signal: controller.signal });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    const { btn, menu } = getEls();
+    if (isMenuOpen(menu)) closeMenu(menu, btn);
+  }, { signal: controller.signal });
+
+  // If using Astro View Transitions, reset menu around swaps
+  document.addEventListener("astro:before-swap", () => {
+    const { btn, menu } = getEls();
+    if (!menu) return;
+    menu.classList.remove("flex", "opacity-100", "scale-y-100");
+    menu.classList.add("hidden", "opacity-0", "scale-y-95");
+    if (btn) btn.setAttribute("aria-expanded", "false");
+  }, { signal: controller.signal });
+</script>
