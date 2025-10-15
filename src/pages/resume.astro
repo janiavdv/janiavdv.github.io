@@ -44,6 +44,31 @@ if (education.length > 0) {
 ---
 
 <Layout title="Resume | Jania Vandevoorde">
+  <div class="flex justify-end mb-8">
+    <a
+      href="/resume.pdf"
+      target="_blank"
+      rel="noopener"
+      class="group inline-flex items-center px-4 py-2 bg-secondary text-white rounded-lg hover:bg-accent transition"
+    >
+      <span class="inline-flex items-center justify-center w-8 h-8 bg-secondary rounded-full mr-2 transition group-hover:bg-accent">
+        <!-- Open Icon (external link) -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 transition-transform duration-200 group-hover:scale-125"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" class="transition stroke-white group-hover:stroke-white"/>
+          <polyline points="15 3 21 3 21 9" class="transition stroke-white group-hover:stroke-white"/>
+          <line x1="10" y1="14" x2="21" y2="3" class="transition stroke-white group-hover:stroke-white"/>
+        </svg>
+      </span>
+      Open Resume PDF
+    </a>
+  </div>
   <div class="max-w-3xl mx-auto">
     {
       orderedEducations.length > 0 && (
