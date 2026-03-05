@@ -14,7 +14,7 @@ export const social = {
 };
 
 export const template = {
-  website_url: "https://www.janiavdv.github.io", // Astro needs to know the site’s deployed URL to generate a sitemap
+  website_url: "https://janiavdv.github.io", // Astro needs to know the site's deployed URL to generate a sitemap
   menu_right: false,
   transitions: true,
   lightTheme: "cupcake", // Daisy UI Themes
