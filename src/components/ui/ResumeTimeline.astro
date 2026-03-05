@@ -1,6 +1,7 @@
 ---
 import { isExperience } from "@/types/resume";
 import type { Experience, Education } from "@/types/resume";
+import Tooltip from "./Tooltip.astro";
 
 interface Props {
   elements: (Experience | Education)[];
@@ -61,9 +62,31 @@ const { elements, colored } = Astro.props;
                 {isExperience(element) ? element.title : element.degree}
               </div>
             )}
-            <div>
-              {isExperience(element) ? element.company : element.school} ·{" "}
-              {element.location}
+            <div
+              class={`flex items-center ${isLeft ? "justify-end" : "justify-start"} gap-2`}
+            >
+              <span>
+                {isExperience(element) ? element.company : element.school} ·{" "}
+                {element.location}
+              </span>
+              {!isExperience(element) &&
+                "courses" in element &&
+                element.courses && (
+                  <Tooltip content={element.courses}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="h-4 w-4 text-gray-500 hover:text-gray-700 transition-colors cursor-help"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </Tooltip>
+                )}
             </div>
             {"description" in element && element.description && (
               <div class="text-gray-600">{element.description}</div>

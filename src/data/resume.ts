@@ -6,6 +6,7 @@ export const experiences = [
     location: "New York, NY",
     description: "C# Driver",
     link: "https://www.mongodb.com",
+    featured: true,
   },
   {
     company: "MongoDB",
@@ -14,6 +15,16 @@ export const experiences = [
     location: "New York, NY",
     description: "Cloud Insights and Telemetry",
     link: "https://www.mongodb.com",
+    featured: true,
+  },
+  {
+    company: "MongoDB",
+    time: "June 2026 - August 2026",
+    title: "Incoming Data Engineer Intern",
+    location: "New York, NY",
+    description: "Data Pipelines",
+    link: "https://www.mongodb.com",
+    featured: true,
   },
   {
     company: "Brown University",
@@ -22,6 +33,7 @@ export const experiences = [
     location: "Providence, RI",
     description: "Machine Learning, Data Structures, Discrete Mathematics",
     link: "https://cs.brown.edu/",
+    featured: false,
   },
   {
     company: "Takachar",
@@ -31,6 +43,16 @@ export const experiences = [
     description:
       "Data analysis and machine learning for agricultural waste management",
     link: "https://www.takachar.com/",
+    featured: false,
+  },
+  {
+    company: "Weber's Restaurant",
+    time: "September 2025 - Present",
+    title: "Server & Server Assistant",
+    location: "Ann Arbor, MI",
+    description: "Fine dining service in a family-owned restaurant",
+    link: "https://www.webersrestaurant.com/",
+    featured: false,
   },
   {
     company: "Brush Creek Ranch",
@@ -39,6 +61,7 @@ export const experiences = [
     location: "Saratoga, WY",
     description: "Fine dining service in a luxury resort",
     link: "https://www.brushcreekranch.com/",
+    featured: false,
   },
   {
     company: "VP Fitness",
@@ -47,6 +70,7 @@ export const experiences = [
     location: "Providence, RI",
     description: "Sales and customer service in a fitness center",
     link: "https://www.vpfitness.net/",
+    featured: false,
   },
 ];
 
@@ -56,7 +80,8 @@ export const education = [
     time: "September 2021 - May 2025",
     degree: "Sc.B. Computer Science",
     location: "Providence, RI",
-    courses: "",
+    courses:
+      "Machine Learning, Deep Learning, Systems for Machine Learning, Computer Vision, Data Science, Computer Systems, Advanced Algorithms, Theory of Computation, Programming Languages, Logic for Systems, Discrete Mathematics, Data Structures",
     link: "https://cs.brown.edu/",
   },
   {
@@ -64,7 +89,8 @@ export const education = [
     time: "September 2021 - May 2025",
     degree: "Sc.B. Statistics",
     location: "Providence, RI",
-    courses: "",
+    courses:
+      "Applied Regression, Statistical Inference, Statistical Programming, Biostatistics, Linear Algebra",
     link: "https://biostatistics.sph.brown.edu/academics/concentration-statistics",
   },
   {
@@ -72,7 +98,8 @@ export const education = [
     time: "August 2025 - December 2026",
     degree: "M.S. Computer Science and Engineering",
     location: "Ann Arbor, MI",
-    courses: "",
+    courses:
+      "Natural Language Processing, Database Management Systems, Information Retrieval, Distributed Systems, Parallel GPU Programming, Advanced Programming Languages",
     link: "https://cse.engin.umich.edu/academics/graduate/graduate-programs/masters-in-cse/",
   },
 ];
@@ -91,6 +118,10 @@ export const languages = [
     level: 5,
   },
   {
+    title: "Go",
+    level: 4,
+  },
+  {
     title: "C#",
     level: 4,
   },
@@ -99,7 +130,7 @@ export const languages = [
     level: 3,
   },
   {
-    title: "Go",
+    title: "OCaml",
     level: 3,
   },
   {

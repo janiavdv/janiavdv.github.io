@@ -27,7 +27,7 @@ const { fullName, title, institute, description, interests } = profile;
   <section class="py-12 border-t">
     <Grid
       gridTitle="Recent Work Experience"
-      gridItems={experiences.slice(0, 3)}
+      gridItems={experiences.filter((exp) => exp.featured).reverse()}
     />
     <div class="mt-8 flex justify-center">
       <a
