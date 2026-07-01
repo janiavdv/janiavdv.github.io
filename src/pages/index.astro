@@ -9,6 +9,24 @@ import Hero from "@/components/ui/Hero.astro";
 import Grid from "@/components/ui/Grid.astro";
 
 const { fullName, title, institute, description, interests } = profile;
+
+const recentWorkExperiences = experiences
+  .filter((exp) => exp.featured)
+  .sort((a, b) => {
+    const presentValues = ["present", "now", "current", "today"];
+    const aEnd = (a.time as string)?.split(" - ")[1]?.toLowerCase();
+    const bEnd = (b.time as string)?.split(" - ")[1]?.toLowerCase();
+
+    if (presentValues.includes(aEnd ?? "")) {
+      return -1;
+    }
+
+    if (presentValues.includes(bEnd ?? "")) {
+      return 1;
+    }
+
+    return new Date(bEnd ?? "").getTime() - new Date(aEnd ?? "").getTime();
+  });
 ---
 
 <Layout>
@@ -16,8 +34,6 @@ const { fullName, title, institute, description, interests } = profile;
   <section class="flex items-center gap-12 border-b pb-12">
     <Hero
       fullName={fullName}
-      title={title}
-      institute={institute}
       description={description}
       profilePicture={ProfilePictures}
     />
@@ -27,7 +43,7 @@ const { fullName, title, institute, description, interests } = profile;
   <section class="py-12 border-t">
     <Grid
       gridTitle="Recent Work Experience"
-      gridItems={experiences.filter((exp) => exp.featured).reverse()}
+      gridItems={recentWorkExperiences}
     />
     <div class="mt-8 flex justify-center">
       <a

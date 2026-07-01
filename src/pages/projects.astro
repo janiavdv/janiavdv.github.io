@@ -8,7 +8,39 @@ const ALL_PROJECTS = projects;
 
 <Layout title="Projects | Jania Vandevoorde">
   <div class="max-w-none">
-    <h1 class="text-3xl font-bold mb-8">Technical Projects</h1>
-    <Grid gridItems={ALL_PROJECTS} />
+    <div class="border-b pb-4 mb-6">
+      <h1 class="text-3xl font-bold">Technical Projects</h1>
+      <label
+        class="mt-3 inline-flex items-center gap-3 text-sm font-medium cursor-pointer select-none"
+      >
+        <span>Show more</span>
+        <input
+          id="extra-projects-toggle"
+          type="checkbox"
+          class="toggle toggle-secondary"
+          aria-controls="projects-grid"
+        />
+      </label>
+    </div>
+    <div id="projects-grid">
+      <Grid gridItems={ALL_PROJECTS} />
+    </div>
   </div>
+  <script is:inline>
+    const toggle = document.getElementById("extra-projects-toggle");
+    const extraProjects = document.querySelectorAll(
+      '[data-project-extra="true"]',
+    );
+
+    if (toggle) {
+      const applyState = () => {
+        extraProjects.forEach((project) => {
+          project.classList.toggle("hidden", !toggle.checked);
+        });
+      };
+
+      applyState();
+      toggle.addEventListener("change", applyState);
+    }
+  </script>
 </Layout>

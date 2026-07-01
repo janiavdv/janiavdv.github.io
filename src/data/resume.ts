@@ -6,7 +6,9 @@ export const experiences = [
     location: "New York, NY",
     description: "C# Driver",
     link: "https://www.mongodb.com",
+    tags: ["C#"],
     featured: true,
+    technical: true,
   },
   {
     company: "MongoDB",
@@ -15,16 +17,20 @@ export const experiences = [
     location: "New York, NY",
     description: "Cloud Insights and Telemetry",
     link: "https://www.mongodb.com",
+    tags: ["Java", "OpenTelemetry"],
     featured: true,
+    technical: true,
   },
   {
     company: "MongoDB",
     time: "June 2026 - August 2026",
-    title: "Incoming Data Engineer Intern",
+    title: "Data Engineer Intern",
     location: "New York, NY",
-    description: "Data Pipelines",
+    description: "Data Pipeline Engineering",
     link: "https://www.mongodb.com",
+    tags: ["Python", "Spark", "Kubernetes", "AWS"],
     featured: true,
+    technical: true,
   },
   {
     company: "Brown University",
@@ -33,7 +39,9 @@ export const experiences = [
     location: "Providence, RI",
     description: "Machine Learning, Data Structures, Discrete Mathematics",
     link: "https://cs.brown.edu/",
+    tags: ["Python", "PyTorch", "Lean"],
     featured: false,
+    technical: true,
   },
   {
     company: "Takachar",
@@ -43,7 +51,9 @@ export const experiences = [
     description:
       "Data analysis and machine learning for agricultural waste management",
     link: "https://www.takachar.com/",
+    tags: ["Python"],
     featured: false,
+    technical: true,
   },
   {
     company: "Weber's Restaurant",
@@ -53,6 +63,7 @@ export const experiences = [
     description: "Fine dining service in a family-owned restaurant",
     link: "https://www.webersrestaurant.com/",
     featured: false,
+    technical: false,
   },
   {
     company: "Brush Creek Ranch",
@@ -62,6 +73,7 @@ export const experiences = [
     description: "Fine dining service in a luxury resort",
     link: "https://www.brushcreekranch.com/",
     featured: false,
+    technical: false,
   },
   {
     company: "VP Fitness",
@@ -71,6 +83,7 @@ export const experiences = [
     description: "Sales and customer service in a fitness center",
     link: "https://www.vpfitness.net/",
     featured: false,
+    technical: false,
   },
 ];
 
@@ -104,86 +117,32 @@ export const education = [
   },
 ];
 
-export const languages = [
-  {
-    title: "Python",
-    level: 5,
-  },
-  {
-    title: "Java",
-    level: 5,
-  },
-  {
-    title: "R",
-    level: 5,
-  },
-  {
-    title: "Go",
-    level: 4,
-  },
-  {
-    title: "C#",
-    level: 4,
-  },
-  {
-    title: "C/C++",
-    level: 3,
-  },
-  {
-    title: "OCaml",
-    level: 3,
-  },
-  {
-    title: "JavaScript/TypeScript",
-    level: 3,
-  },
-  {
-    title: "HTML/CSS",
-    level: 3,
-  },
-];
-
-export const technologies = [
-  {
-    title: "SQL",
-    level: 5,
-  },
-  {
-    title: "Git",
-    level: 5,
-  },
-  {
-    title: "PyTorch",
-    level: 5,
-  },
-  {
-    title: "TensorFlow",
-    level: 5,
-  },
-  {
-    title: "scikit-learn",
-    level: 5,
-  },
-  {
-    title: "CUDA",
-    level: 4,
-  },
-  {
-    title: "Docker",
-    level: 4,
-  },
-  {
-    title: "React",
-    level: 3,
-  },
-];
-
 export const projects = [
+  {
+    title: "Reflective ALFA",
+    description:
+      "Reflective interpreter for a functional language with first-class functions, continuations, and runtime code inspection",
+    time: "2026",
+    link: "https://github.com/janiavdv/reflective-ALFA",
+    tags: ["OCaml"],
+    extra: false,
+  },
+  {
+    title: "Text2ClasSQL",
+    description:
+      "Classification-based text-to-SQL system that uses database schema encodings to map natural language questions into SQL queries",
+    time: "2025",
+    link: "https://github.com/janiavdv/text2classql",
+    tags: ["Python", "PyTorch", "SQL"],
+    extra: false,
+  },
   {
     title: "NeurANIL",
     description: "Meta-learning model in PyTorch to decode neural signals",
     time: "2025",
     link: "https://github.com/Yishu-Li/NeuraNIL",
+    tags: ["Python", "PyTorch"],
+    extra: false,
   },
   {
     title: "Colorizer",
@@ -191,6 +150,8 @@ export const projects = [
       "Grayscale image colorization using a Convolutional Neural Network with a U-Net architecture",
     time: "2024",
     link: "https://github.com/janiavdv/colorizer",
+    tags: ["Python", "TensorFlow"],
+    extra: false,
   },
   {
     title: "Risk Score Research",
@@ -198,6 +159,8 @@ export const projects = [
       "R package to estimate integer risk score model coefficients using randomized rounding, logistic regression, and cyclical coordinate descent",
     time: "2024",
     link: "https://github.com/hjeglinton/riskscores",
+    tags: ["R"],
+    extra: false,
   },
   {
     title: "Scrappy",
@@ -205,6 +168,8 @@ export const projects = [
       "Scrapbook-style social media web app that combines the ability to share content with friends and document personal memories",
     time: "2023",
     link: "https://github.com/janiavdv/scrappy",
+    tags: ["Java", "TypeScript"],
+    extra: false,
   },
   {
     title: "Data Spirits",
@@ -212,6 +177,8 @@ export const projects = [
       "Analysis of the correlation between alcohol consumption and sports betting volume using machine learning for data interpolation and predictive modeling",
     time: "2024",
     link: "https://github.com/janiavdv/data-spirits",
+    tags: ["Python"],
+    extra: true,
   },
   {
     title: "WeensyOS Model",
@@ -219,5 +186,7 @@ export const projects = [
       "Operating system model in a formal methods language, including pagetables, memory allocation, and system calls",
     time: "2023",
     link: "https://github.com/janiavdv/lfs-weensyos",
+    tags: [],
+    extra: true,
   },
 ];

@@ -1,16 +1,9 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import {
-  experiences,
-  education,
-  languages,
-  technologies,
-  projects,
-} from "../data/resume";
+import { experiences, education } from "../data/resume";
 import ResumeTimeline from "@/components/ui/ResumeTimeline.astro";
 
 import type { Experience, Education } from "../types/resume";
-import Grid from "@/components/ui/Grid.astro";
 
 let orderedExperiences: Experience[] = [];
 let orderedEducations: Education[] = [];
@@ -19,7 +12,7 @@ const orderElement = <T extends { time: string }>(a: T, b: T) => {
   const presentValues = ["present", "now", "current", "today"];
   if (
     presentValues.includes(
-      (a["time"] as string)?.split(" - ")[1]?.toLowerCase()
+      (a["time"] as string)?.split(" - ")[1]?.toLowerCase(),
     )
   ) {
     // If the date is 'present', it should be the first element
@@ -51,7 +44,9 @@ if (education.length > 0) {
       rel="noopener"
       class="group inline-flex items-center px-4 py-2 bg-secondary text-white rounded-lg hover:bg-accent transition"
     >
-      <span class="inline-flex items-center justify-center w-8 h-8 bg-secondary rounded-full mr-2 transition group-hover:bg-accent">
+      <span
+        class="inline-flex items-center justify-center w-8 h-8 bg-secondary rounded-full mr-2 transition group-hover:bg-accent"
+      >
         <!-- Open Icon (external link) -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -61,9 +56,18 @@ if (education.length > 0) {
           stroke="currentColor"
           stroke-width="2"
         >
-          <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" class="transition stroke-white group-hover:stroke-white"/>
-          <polyline points="15 3 21 3 21 9" class="transition stroke-white group-hover:stroke-white"/>
-          <line x1="10" y1="14" x2="21" y2="3" class="transition stroke-white group-hover:stroke-white"/>
+          <path
+            d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+            class="transition stroke-white group-hover:stroke-white"></path>
+          <polyline
+            points="15 3 21 3 21 9"
+            class="transition stroke-white group-hover:stroke-white"></polyline>
+          <line
+            x1="10"
+            y1="14"
+            x2="21"
+            y2="3"
+            class="transition stroke-white group-hover:stroke-white"></line>
         </svg>
       </span>
       Open Resume PDF
@@ -84,37 +88,102 @@ if (education.length > 0) {
     {
       orderedExperiences.length > 0 && (
         <section class="mb-12">
-          <h2 class="text-2xl font-bold mb-6 border-b pb-2 text-left">
-            Experiences
-          </h2>
+          <div class="border-b pb-4 mb-6">
+            <h2 class="text-2xl font-bold text-left">Experiences</h2>
+            <label class="mt-3 inline-flex items-center gap-3 text-sm font-medium cursor-pointer select-none">
+              <span>Show non-technical experiences</span>
+              <input
+                id="non-technical-toggle"
+                type="checkbox"
+                class="toggle toggle-secondary"
+                aria-controls="experiences-container"
+              />
+            </label>
+          </div>
           <div id="experiences-container">
-            <ResumeTimeline
-              elements={orderedExperiences}
-              colored={true}
-            />
+            <ResumeTimeline elements={orderedExperiences} colored={true} />
           </div>
         </section>
       )
     }
-    {
-      languages.length > 0 && (
-        <section class="mb-12">
-          <h2 class="text-2xl font-bold mb-6 border-b pb-2 text-left">
-            Programming Languages
-          </h2>
-          <Grid gridTitle={undefined} gridItems={languages} />
-        </section>
-      )
-    }
-    {
-      technologies.length > 0 && (
-        <section class="mb-12">
-          <h2 class="text-2xl font-bold mb-6 border-b pb-2 text-left">
-            Technologies
-          </h2>
-          <Grid gridTitle={undefined} gridItems={technologies} />
-        </section>
-      )
-    }
+
+    <section class="mb-12">
+      <div class="border-b pb-4 mb-6">
+        <h2 class="text-2xl font-bold text-left">Projects</h2>
+      </div>
+      <div class="flex justify-start">
+        <a
+          href="/projects"
+          class="group inline-flex items-center px-4 py-2 bg-secondary text-white rounded-lg hover:bg-accent transition"
+        >
+          <span
+            class="inline-flex items-center justify-center w-8 h-8 bg-secondary rounded-full mr-2 transition group-hover:bg-accent"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 transition-transform duration-200 group-hover:scale-125"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect
+                x="4"
+                y="4"
+                width="6"
+                height="6"
+                rx="1"
+                class="transition stroke-white group-hover:stroke-white"></rect>
+              <rect
+                x="14"
+                y="4"
+                width="6"
+                height="6"
+                rx="1"
+                class="transition stroke-white group-hover:stroke-white"></rect>
+              <rect
+                x="4"
+                y="14"
+                width="6"
+                height="6"
+                rx="1"
+                class="transition stroke-white group-hover:stroke-white"></rect>
+              <rect
+                x="14"
+                y="14"
+                width="6"
+                height="6"
+                rx="1"
+                class="transition stroke-white group-hover:stroke-white"></rect>
+            </svg>
+          </span>
+          View Projects
+        </a>
+      </div>
+    </section>
   </div>
+  <script is:inline>
+    const setupExperienceToggle = () => {
+      const toggle = document.getElementById("non-technical-toggle");
+      const experiences = document.querySelectorAll(
+        '[data-experience-technical="false"]',
+      );
+
+      if (!toggle || experiences.length === 0) {
+        return;
+      }
+
+      const applyState = () => {
+        experiences.forEach((experience) => {
+          experience.classList.toggle("hidden", !toggle.checked);
+        });
+      };
+
+      applyState();
+      toggle.addEventListener("change", applyState);
+    };
+
+    setupExperienceToggle();
+    document.addEventListener("astro:page-load", setupExperienceToggle);
+  </script>
 </Layout>

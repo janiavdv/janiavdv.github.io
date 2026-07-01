@@ -5,6 +5,8 @@ export interface Experience {
   location?: string;
   description?: string;
   link?: string;
+  tags?: string[];
+  technical: boolean;
 }
 
 export interface Education {
@@ -26,11 +28,13 @@ export interface Project {
   description: string;
   time: string;
   link?: string;
+  tags?: string[];
+  extra: boolean;
 }
 
 // Function to check if an element is of type Experience or Education
 export function isExperience(
-  element: Experience | Education
+  element: Experience | Education,
 ): element is Experience {
   return "title" in element && "company" in element;
 }

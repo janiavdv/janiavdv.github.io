@@ -1,27 +1,58 @@
 ---
-import type { Skill } from "@/types/resume";
+import type { Project, Skill } from "@/types/resume";
 
 interface Props {
   gridTitle?: string;
   gridItems: (
     | Skill
+    | Project
     | {
         title: string;
         description?: string;
         level?: number;
         company?: string;
+        tags?: string[];
       }
   )[];
 }
 
 const { gridTitle, gridItems } = Astro.props;
+
+const tagStyles: Record<string, string> = {
+  python: "bg-violet-500",
+  pytorch: "bg-violet-400",
+  tensorflow: "bg-violet-300",
+  r: "bg-cyan-500",
+  typescript: "bg-amber-500",
+  ocaml: "bg-orange-500",
+  java: "bg-red-500",
+  "c#": "bg-red-400",
+  opentelemetry: "bg-green-500",
+  spark: "bg-orange-600",
+  kubernetes: "bg-blue-500",
+  aws: "bg-yellow-500",
+  sql: "bg-emerald-400",
+  lean: "bg-slate-500",
+  default: "bg-secondary",
+};
+
+const getTagStyle = (tag: string) => {
+  return tagStyles[tag.toLowerCase()] ?? tagStyles.default;
+};
+
+const formatTagLabel = (tag: string) => {
+  return tag.toLowerCase() === "csharp" ? "C#" : tag;
+};
 ---
 
 <h2 class="text-2xl md:text-3xl font-bold mb-6 md:mb-8">{gridTitle}</h2>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+<div
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 justify-items-stretch"
+>
   {
     gridItems.map((item) => {
       const isProject = !("level" in item) && !("company" in item);
+      const hasLink = "link" in item && Boolean(item.link);
       const content = (
         <>
           {"company" in item && item.company && (
@@ -31,7 +62,7 @@ const { gridTitle, gridItems } = Astro.props;
           )}
           <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-4 tracking-tight flex items-center gap-2 group-hover:text-secondary">
             {item.title}
-            {isProject && (
+            {hasLink && (
               <span class="ml-auto flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -47,6 +78,16 @@ const { gridTitle, gridItems } = Astro.props;
           {"time" in item && item.time && (
             <div class="mb-2 md:mb-3 text-xs md:text-sm font-medium text-base-content/60">
               {item.time}
+            </div>
+          )}
+          {"tags" in item && item.tags && item.tags.length > 0 && (
+            <div class="mb-2 md:mb-3 flex flex-wrap gap-1.5">
+              {item.tags.map((tag) => (
+                <span class="inline-flex items-center gap-1.5 rounded-full border border-base-300 bg-base-100 px-2 py-1 text-[0.64rem] font-semibold uppercase tracking-wide text-base-content/80 shadow-sm whitespace-nowrap">
+                  <span class={`h-2 w-2 rounded-full ${getTagStyle(tag)}`} />
+                  <span>{formatTagLabel(tag)}</span>
+                </span>
+              ))}
             </div>
           )}
           {"level" in item && item.level ? (
@@ -68,17 +109,29 @@ const { gridTitle, gridItems } = Astro.props;
         </>
       );
 
+      const isExtraProject = "extra" in item && item.extra;
+
       return "link" in item && item.link ? (
         <a
           href={typeof item.link === "string" ? item.link : undefined}
-          class="p-4 md:p-6 rounded-lg text-base-content bg-base-200 group transition-transform duration-200 hover:scale-105 hover:shadow-lg block"
+          class:list={[
+            "p-4 md:p-6 rounded-lg text-base-content bg-base-200 group transition-transform duration-200 hover:scale-105 hover:shadow-lg block w-full min-w-0 h-[280px] overflow-hidden",
+            { hidden: isExtraProject },
+          ]}
+          data-project-extra={isExtraProject ? "true" : "false"}
           target="_blank"
           rel="noopener noreferrer"
         >
           {content}
         </a>
       ) : (
-        <div class="p-4 md:p-6 rounded-lg text-base-content bg-base-200 group transition-transform duration-200 hover:scale-105 hover:shadow-lg">
+        <div
+          class:list={[
+            "p-4 md:p-6 rounded-lg text-base-content bg-base-200 group transition-transform duration-200 hover:scale-105 hover:shadow-lg w-full min-w-0 h-[280px] overflow-hidden",
+            { hidden: isExtraProject },
+          ]}
+          data-project-extra={isExtraProject ? "true" : "false"}
+        >
           {content}
         </div>
       );
