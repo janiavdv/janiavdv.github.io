@@ -137,6 +137,14 @@ export const projects = [
     extra: false,
   },
   {
+    title: "Parallelism in Training",
+    description:
+      "DDP, FSDP, model & pipeline parallelism implemented from scratch on raw PyTorch collectives",
+    time: "2025",
+    tags: ["Python", "PyTorch"],
+    extra: false,
+  },
+  {
     title: "NeurANIL",
     description: "Meta-learning model in PyTorch to decode neural signals",
     time: "2025",
@@ -169,7 +177,7 @@ export const projects = [
     time: "2023",
     link: "https://github.com/janiavdv/scrappy",
     tags: ["Java", "TypeScript"],
-    extra: false,
+    extra: true,
   },
   {
     title: "Data Spirits",
