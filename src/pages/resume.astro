@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { experiences, education } from "../data/resume";
 import ResumeTimeline from "@/components/ui/ResumeTimeline.astro";
+import { template } from "@/settings";
 
 import type { Experience, Education } from "../types/resume";
 
@@ -24,13 +25,13 @@ const orderElement = <T extends { time: string }>(a: T, b: T) => {
 };
 
 if (experiences.length > 0) {
-  orderedExperiences = experiences.sort((a, b) => {
+  orderedExperiences = [...experiences].sort((a, b) => {
     return orderElement(a, b);
   });
 }
 
 if (education.length > 0) {
-  orderedEducations = education.sort((a, b) => {
+  orderedEducations = [...education].sort((a, b) => {
     return orderElement(a, b);
   });
 }
@@ -39,7 +40,7 @@ if (education.length > 0) {
 <Layout title="Resume | Jania Vandevoorde">
   <div class="flex justify-end mb-8">
     <a
-      href="/jul26.pdf"
+      href={`${template.base}/jul26.pdf`}
       target="_blank"
       rel="noopener"
       class="group inline-flex items-center px-4 py-2 bg-secondary text-white rounded-lg hover:bg-accent transition"
@@ -113,7 +114,7 @@ if (education.length > 0) {
       </div>
       <div class="flex justify-start">
         <a
-          href="/projects"
+          href={`${template.base}/projects`}
           class="group inline-flex items-center px-4 py-2 bg-secondary text-white rounded-lg hover:bg-accent transition"
         >
           <span

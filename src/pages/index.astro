@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-import { profile } from "@/settings";
+import { profile, template } from "@/settings";
 import { projects } from "@/data/resume";
 import { experiences } from "@/data/resume";
 import ProfilePictures from "@/assets/profile_picture.jpg";
@@ -47,7 +47,7 @@ const recentWorkExperiences = experiences
     />
     <div class="mt-8 flex justify-center">
       <a
-        href="/resume"
+        href={`${template.base}/resume`}
         class="inline-block px-6 py-2 rounded-full bg-secondary text-white hover:bg-accent transition-colors duration-200 text-center"
       >
         More Experience
@@ -60,7 +60,7 @@ const recentWorkExperiences = experiences
     <Grid gridTitle="Recent Projects" gridItems={projects.slice(0, 3)} />
     <div class="mt-8 flex justify-center">
       <a
-        href="/projects"
+        href={`${template.base}/projects`}
         class="inline-block px-6 py-2 rounded-full bg-secondary text-white hover:bg-accent transition-colors duration-200 text-center"
       >
         More Projects

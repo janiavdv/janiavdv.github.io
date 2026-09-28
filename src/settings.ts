@@ -26,5 +26,5 @@ export const template = {
 export const seo = {
   default_title: "Jania Vandevoorde",
   default_description: "Jania Vandevoorde's personal website.",
-  default_image: "/favicon.svg", // Default image for social sharing
+  default_image: "/og-image.jpg", // Default image for social sharing
 };

@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { template } from "@/settings";
 ---
 
 <Layout title="404 - Page Not Found">
@@ -13,7 +14,9 @@ import Layout from "@/layouts/Layout.astro";
       Don't worry, you can always find your way back home.
     </p>
     <div class="flex gap-4">
-      <a href="/" class="btn btn-primary text-primary-content"> Go Home </a>
+      <a href={`${template.base}/`} class="btn btn-primary text-primary-content">
+        Go Home
+      </a>
       <button class="btn btn-outline btn-accent" onclick="history.back()">
         Go Back
       </button>

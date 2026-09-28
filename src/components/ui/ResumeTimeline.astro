@@ -2,6 +2,7 @@
 import { isExperience } from "@/types/resume";
 import type { Experience, Education } from "@/types/resume";
 import Tooltip from "./Tooltip.astro";
+import { getTagStyle, formatTagLabel } from "@/data/tagStyles";
 
 interface Props {
   elements: (Experience | Education)[];
@@ -9,30 +10,6 @@ interface Props {
 }
 
 const { elements, colored } = Astro.props;
-
-const tagStyles: Record<string, string> = {
-  python: "bg-violet-500",
-  pytorch: "bg-violet-400",
-  tensorflow: "bg-violet-300",
-  r: "bg-cyan-500",
-  typescript: "bg-amber-500",
-  ocaml: "bg-orange-500",
-  java: "bg-red-500",
-  csharp: "bg-red-400",
-  "c#": "bg-red-400",
-  mongodb: "bg-emerald-500",
-  sql: "bg-emerald-400",
-  lean: "bg-slate-500",
-  default: "bg-primary",
-};
-
-const getTagStyle = (tag: string) => {
-  return tagStyles[tag.toLowerCase()] ?? tagStyles.default;
-};
-
-const formatTagLabel = (tag: string) => {
-  return tag.toLowerCase() === "csharp" ? "C#" : tag;
-};
 ---
 
 <ul
