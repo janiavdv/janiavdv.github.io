@@ -4,7 +4,7 @@ export const profile = {
   institute: "the University of Michigan",
   description: `I graduated from Brown University with a dual degree in Computer Science and Statistics, 
     and I'm now finishing my Master's degree at the University of Michigan. I'm interested in building 
-    systems for data-intensive applications, machine learning infrastructure, and GPU-accelerated computing.`,
+    agentic systems and machine learning infrastructure.`,
   interests: [],
 };
 

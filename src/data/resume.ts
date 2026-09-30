@@ -18,7 +18,7 @@ export const experiences = [
     description: "Cloud Insights and Telemetry",
     link: "https://www.mongodb.com",
     tags: ["Java", "OpenTelemetry"],
-    featured: false,
+    featured: true,
     technical: true,
   },
   {
@@ -52,7 +52,7 @@ export const experiences = [
       "Data analysis and machine learning for agricultural waste management",
     link: "https://www.takachar.com/",
     tags: ["Python"],
-    featured: true,
+    featured: false,
     technical: true,
   },
   {
@@ -112,7 +112,7 @@ export const education = [
     degree: "M.S. Computer Science and Engineering",
     location: "Ann Arbor, MI",
     courses:
-      "Natural Language Processing, Database Management Systems, Information Retrieval, Distributed Systems, Parallel GPU Programming, Advanced Programming Languages",
+      "Natural Language Processing, Database Management Systems, Distributed Systems, Computer Architecture, Parallel GPU Programming, Open Source Software in the Agentic Era, Information Retrieval, Advanced Programming Languages, Advanced Cryptography",
     link: "https://cse.engin.umich.edu/academics/graduate/graduate-programs/masters-in-cse/",
   },
 ];
