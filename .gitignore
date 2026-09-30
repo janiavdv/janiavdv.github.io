@@ -22,3 +22,13 @@ pnpm-debug.log*
 
 # vscode
 .vscode/
+
+# impeccable (design skill) — machine-local overrides and session/build scratch state.
+# DESIGN.md, .impeccable/design.json, .impeccable/config.json, and .impeccable/critique/
+# are shared project state and stay committed.
+.impeccable/config.local.json
+.impeccable/build/
+.impeccable/review/
+.impeccable/live/sessions/
+.impeccable/live/roots.json
+.impeccable/live/inject-journal.json

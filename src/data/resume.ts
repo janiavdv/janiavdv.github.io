@@ -7,7 +7,7 @@ export const experiences = [
     description: "C# Driver",
     link: "https://www.mongodb.com",
     tags: ["C#"],
-    featured: true,
+    featured: false,
     technical: true,
   },
   {
@@ -18,7 +18,7 @@ export const experiences = [
     description: "Cloud Insights and Telemetry",
     link: "https://www.mongodb.com",
     tags: ["Java", "OpenTelemetry"],
-    featured: true,
+    featured: false,
     technical: true,
   },
   {
@@ -40,7 +40,7 @@ export const experiences = [
     description: "Machine Learning, Data Structures, Discrete Mathematics",
     link: "https://cs.brown.edu/",
     tags: ["Python", "PyTorch", "Lean"],
-    featured: false,
+    featured: true,
     technical: true,
   },
   {
@@ -52,7 +52,7 @@ export const experiences = [
       "Data analysis and machine learning for agricultural waste management",
     link: "https://www.takachar.com/",
     tags: ["Python"],
-    featured: false,
+    featured: true,
     technical: true,
   },
   {
