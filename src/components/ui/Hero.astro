@@ -3,14 +3,28 @@ import { Image } from "astro:assets";
 
 import SocialIcons from "./SocialIcons.astro";
 
-const { fullName, description, profilePicture } = Astro.props;
+const { fullName, title, institute, description, profilePicture } =
+  Astro.props;
+
+// "the University of Michigan" reads naturally in a sentence but not as a
+// standalone label, so drop the leading article for the eyebrow display only.
+const instituteLabel = institute?.replace(/^the\s+/i, "");
 ---
 
 <div class="flex flex-col lg:flex-row items-center gap-8">
   <div class="flex-1">
-    <h1 class="text-4xl font-bold mb-4">
+    <h1 class="text-4xl font-bold mb-2">
       Welcome! I'm <span class="text-secondary">{fullName}</span>
     </h1>
+    {
+      (title || instituteLabel) && (
+        <p class="text-lg italic text-base-content/70 mb-4">
+          {title}
+          {title && instituteLabel && " · "}
+          {instituteLabel}
+        </p>
+      )
+    }
     <p class="text-lg mb-6">
       {description}
     </p>
