@@ -36,3 +36,10 @@ Pushes to `main` trigger `.github/workflows/deploy.yml`, which builds and publis
 - Write idiomatic code; no unnecessary comments.
 - Follow `DESIGN.md` and the existing daisyUI theme tokens rather than hard-coding colors.
 - Open a PR for changes; don't push to `main`.
+
+## Commits
+
+Conventional commits, matching the existing history: `type: lowercase summary`, no scope, no body, no trailing period.
+
+- Types in use: `feat` (content or features, including routine site updates), `fix`, `chore`, `docs`, `build`
+- Examples: `feat: update resume`, `fix: correct image paths`, `docs: update README`
