@@ -1,14 +1,30 @@
 <div class="floating-ball" aria-hidden="true">
-  <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
-    <g class="text-secondary" fill="currentColor">
-      <ellipse cx="50" cy="30" rx="46" ry="26" />
+  <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="ball-clip">
+        <path d="M6 35C20 6 100 6 114 35C100 64 20 64 6 35Z" />
+      </clipPath>
+    </defs>
+    <path
+      d="M6 35C20 6 100 6 114 35C100 64 20 64 6 35Z"
+      class="fill-secondary"
+    />
+    <g clip-path="url(#ball-clip)" fill="none" stroke="currentColor" stroke-width="2" opacity="0.55">
+      <path d="M30 4Q42 35 30 66" />
+      <path d="M90 4Q78 35 90 66" />
+      <path d="M60 4V66" />
     </g>
-    <g fill="none" stroke="var(--fallback-b1,oklch(var(--b1)))" stroke-width="2.5" stroke-linecap="round">
-      <ellipse cx="50" cy="30" rx="46" ry="26" opacity="0.6" />
-      <path d="M32 30h36" />
-      <path d="M40 24v12M50 24v12M60 24v12" stroke-width="2" />
-      <path d="M22 14q-6 16 0 32M78 14q6 16 0 32" opacity="0.6" />
+    <g stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.8">
+      <path d="M42 35H78" />
+      <path d="M48 29V41M54 29V41M60 29V41M66 29V41M72 29V41" />
     </g>
+    <path
+      d="M6 35C20 6 100 6 114 35C100 64 20 64 6 35Z"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      opacity="0.8"
+    />
   </svg>
 </div>
 
@@ -17,8 +33,9 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 3.5rem;
-    opacity: 0.35;
+    width: 4.5rem;
+    color: oklch(var(--bc));
+    opacity: 0.6;
     pointer-events: none;
     z-index: 10;
     animation:
@@ -31,11 +48,11 @@
   }
   @keyframes drift-x {
     from { transform: translateX(4vw); }
-    to { transform: translateX(calc(96vw - 3.5rem)); }
+    to { transform: translateX(calc(96vw - 4.5rem)); }
   }
   @keyframes drift-y {
     from { top: 12vh; }
-    to { top: calc(88vh - 3.5rem); }
+    to { top: calc(88vh - 4.5rem); }
   }
   @keyframes spin {
     to { transform: rotate(360deg); }
