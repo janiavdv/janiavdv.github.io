@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import ball from "@/assets/rugby-ball.png";
-import { template } from "@/settings";
 ---
 
 <div id="floating-ball" transition:persist>
@@ -13,7 +12,6 @@ import { template } from "@/settings";
     class="ball-img"
     aria-hidden="true"
   />
-  <a href={`${template.base}/rugby`} class="ball-tag">rugby →</a>
 </div>
 
 <style>
@@ -27,30 +25,12 @@ import { template } from "@/settings";
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     will-change: transform;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
   #floating-ball :global(.ball-img) {
     display: block;
     width: 100%;
     height: auto;
     opacity: 0.7;
-  }
-  .ball-tag {
-    margin-top: 0.25rem;
-    padding: 0.125rem 0.625rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    white-space: nowrap;
-    background: oklch(var(--s));
-    color: oklch(var(--sc));
-    transition: background-color 200ms;
-  }
-  .ball-tag:hover {
-    background: oklch(var(--a));
-    color: oklch(var(--ac));
   }
   @media (prefers-reduced-motion: reduce) {
     #floating-ball {
@@ -77,54 +57,47 @@ import { template } from "@/settings";
     let vy = CRUISE * 0.7;
     let angle = 0;
     let spin = 40;
-    let hovered = false;
     let last = performance.now();
 
     window.addEventListener("resize", () => {
       width = el.offsetWidth;
       height = el.offsetHeight;
     });
-    el.addEventListener("pointerenter", () => (hovered = true));
-    el.addEventListener("pointerleave", () => (hovered = false));
 
     const tick = (now: number) => {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
 
-      if (!hovered) {
-        const speed = Math.hypot(vx, vy);
-        if (speed > CRUISE) {
-          const k = Math.max(CRUISE / speed, 1 - DRAG * dt);
-          vx *= k;
-          vy *= k;
-        }
-        spin += (Math.sign(vx || 1) * 40 - spin) * Math.min(dt * 1.5, 1);
-
-        x += vx * dt;
-        y += vy * dt;
-        angle += spin * dt;
-
-        const maxX = window.innerWidth - width;
-        const maxY = window.innerHeight - height;
-        if (x < 0 || x > maxX) {
-          x = Math.min(Math.max(x, 0), maxX);
-          vx = -vx;
-          spin = -spin;
-        }
-        if (y < 0 || y > maxY) {
-          y = Math.min(Math.max(y, 0), maxY);
-          vy = -vy;
-        }
-
-        el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        img.style.transform = `rotate(${angle}deg)`;
+      const speed = Math.hypot(vx, vy);
+      if (speed > CRUISE) {
+        const k = Math.max(CRUISE / speed, 1 - DRAG * dt);
+        vx *= k;
+        vy *= k;
       }
+      spin += (Math.sign(vx || 1) * 40 - spin) * Math.min(dt * 1.5, 1);
+
+      x += vx * dt;
+      y += vy * dt;
+      angle += spin * dt;
+
+      const maxX = window.innerWidth - width;
+      const maxY = window.innerHeight - height;
+      if (x < 0 || x > maxX) {
+        x = Math.min(Math.max(x, 0), maxX);
+        vx = -vx;
+        spin = -spin;
+      }
+      if (y < 0 || y > maxY) {
+        y = Math.min(Math.max(y, 0), maxY);
+        vy = -vy;
+      }
+
+      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      img.style.transform = `rotate(${angle}deg)`;
       requestAnimationFrame(tick);
     };
 
-    img.parentElement?.addEventListener("pointerdown", (e) => {
-      if ((e.target as HTMLElement).closest(".ball-tag")) return;
-      hovered = false;
+    el.addEventListener("pointerdown", (e) => {
       const rect = img.getBoundingClientRect();
       const dx = rect.left + rect.width / 2 - e.clientX;
       const dy = rect.top + rect.height / 2 - e.clientY;
