@@ -3,42 +3,96 @@ import { Image } from "astro:assets";
 import ball from "@/assets/rugby-ball.png";
 ---
 
-<div class="floating-ball" aria-hidden="true">
-  <Image src={ball} alt="" width={160} class="ball-img" />
+<div id="floating-ball" transition:persist aria-hidden="true">
+  <Image src={ball} alt="" width={160} draggable="false" />
 </div>
 
 <style>
-  .floating-ball {
+  #floating-ball {
     position: fixed;
     top: 0;
     left: 0;
     width: 5rem;
-    opacity: 0.55;
-    pointer-events: none;
+    opacity: 0.6;
     z-index: 10;
-    animation:
-      drift-x 38s ease-in-out infinite alternate,
-      drift-y 23s ease-in-out infinite alternate;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    will-change: transform;
   }
-  .floating-ball :global(.ball-img) {
+  #floating-ball :global(img) {
+    display: block;
     width: 100%;
     height: auto;
-    animation: spin 18s linear infinite;
-  }
-  @keyframes drift-x {
-    from { transform: translateX(4vw); }
-    to { transform: translateX(calc(96vw - 5rem)); }
-  }
-  @keyframes drift-y {
-    from { top: 12vh; }
-    to { top: calc(88vh - 5rem); }
-  }
-  @keyframes spin {
-    to { transform: rotate(360deg); }
+    pointer-events: none;
   }
   @media (prefers-reduced-motion: reduce) {
-    .floating-ball {
+    #floating-ball {
       display: none;
     }
   }
 </style>
+
+<script>
+  const el = document.getElementById("floating-ball");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (el && !reduced.matches) {
+    const CRUISE = 140;
+    const KICK = 900;
+    const DRAG = 1.2;
+
+    let size = el.offsetWidth;
+    let x = window.innerWidth * 0.1;
+    let y = window.innerHeight * 0.2;
+    let vx = CRUISE;
+    let vy = CRUISE * 0.7;
+    let angle = 0;
+    let spin = 40;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+
+      const speed = Math.hypot(vx, vy);
+      if (speed > CRUISE) {
+        const k = Math.max(CRUISE / speed, 1 - DRAG * dt);
+        vx *= k;
+        vy *= k;
+      }
+      spin += (Math.sign(vx || 1) * 40 - spin) * Math.min(dt * 1.5, 1);
+
+      x += vx * dt;
+      y += vy * dt;
+      angle += spin * dt;
+
+      const maxX = window.innerWidth - size;
+      const maxY = window.innerHeight - size;
+      if (x < 0 || x > maxX) {
+        x = Math.min(Math.max(x, 0), maxX);
+        vx = -vx;
+        spin = -spin;
+      }
+      if (y < 0 || y > maxY) {
+        y = Math.min(Math.max(y, 0), maxY);
+        vy = -vy;
+      }
+
+      el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${angle}deg)`;
+      requestAnimationFrame(tick);
+    };
+
+    el.addEventListener("pointerdown", (e) => {
+      const rect = el.getBoundingClientRect();
+      const dx = rect.left + rect.width / 2 - e.clientX;
+      const dy = rect.top + rect.height / 2 - e.clientY;
+      const len = Math.hypot(dx, dy) || 1;
+      vx = (dx / len) * KICK + (Math.random() - 0.5) * 200;
+      vy = (dy / len) * KICK - 200;
+      spin = (Math.random() < 0.5 ? -1 : 1) * (600 + Math.random() * 400);
+    });
+
+    requestAnimationFrame(tick);
+  }
+</script>
