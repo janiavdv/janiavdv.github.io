@@ -1,0 +1,52 @@
+<div class="floating-ball" aria-hidden="true">
+  <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+    <g class="text-secondary" fill="currentColor">
+      <ellipse cx="50" cy="30" rx="46" ry="26" />
+    </g>
+    <g fill="none" stroke="var(--fallback-b1,oklch(var(--b1)))" stroke-width="2.5" stroke-linecap="round">
+      <ellipse cx="50" cy="30" rx="46" ry="26" opacity="0.6" />
+      <path d="M32 30h36" />
+      <path d="M40 24v12M50 24v12M60 24v12" stroke-width="2" />
+      <path d="M22 14q-6 16 0 32M78 14q6 16 0 32" opacity="0.6" />
+    </g>
+  </svg>
+</div>
+
+<style>
+  .floating-ball {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 3.5rem;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 10;
+    animation:
+      drift-x 38s ease-in-out infinite alternate,
+      drift-y 23s ease-in-out infinite alternate;
+  }
+  .floating-ball svg {
+    width: 100%;
+    animation: spin 14s linear infinite;
+  }
+  @keyframes drift-x {
+    from { transform: translateX(4vw); }
+    to { transform: translateX(calc(96vw - 3.5rem)); }
+  }
+  @keyframes drift-y {
+    from { top: 12vh; }
+    to { top: calc(88vh - 3.5rem); }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .floating-ball,
+    .floating-ball svg {
+      animation: none;
+    }
+    .floating-ball {
+      display: none;
+    }
+  }
+</style>

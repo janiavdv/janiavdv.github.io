@@ -6,6 +6,7 @@ import Head from "../components/Head.astro";
 
 import { seo, template } from "../settings";
 import Footer from "../components/ui/Footer.astro";
+import FloatingBall from "../components/ui/FloatingBall.astro";
 
 type Props = {
   title?: string;
@@ -27,6 +28,7 @@ const {
     <Head title={title} description={description} image={image} />
   </head>
   <body>
+    <FloatingBall />
     <div style="position: sticky; top: 0; z-index: 50;">
       <Navbar />
     </div>
