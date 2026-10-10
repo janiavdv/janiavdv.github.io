@@ -1,0 +1,62 @@
+---
+interface Props {
+  counts: Map<string, number>;
+  unit: string;
+  weeks?: number;
+}
+
+const { counts, unit, weeks = 52 } = Astro.props;
+
+const today = new Date();
+today.setUTCHours(0, 0, 0, 0);
+const start = new Date(today);
+start.setUTCDate(start.getUTCDate() - (weeks * 7 - 1) - today.getUTCDay());
+
+const columns: { date: string; count: number; future: boolean }[][] = [];
+for (let w = 0; w < weeks + 1; w++) {
+  const column = [];
+  for (let d = 0; d < 7; d++) {
+    const date = new Date(start);
+    date.setUTCDate(start.getUTCDate() + w * 7 + d);
+    const key = date.toISOString().slice(0, 10);
+    column.push({ date: key, count: counts.get(key) ?? 0, future: date > today });
+  }
+  columns.push(column);
+}
+
+const total = columns.flat().reduce((sum, cell) => sum + cell.count, 0);
+
+const shade = (count: number) =>
+  count === 0
+    ? "bg-base-300"
+    : count === 1
+      ? "bg-secondary/50"
+      : "bg-secondary";
+---
+
+<div>
+  <div class="overflow-x-auto pb-1">
+    <div class="flex gap-[3px] w-max">
+      {
+        columns.map((column) => (
+          <div class="flex flex-col gap-[3px]">
+            {column.map((cell) =>
+              cell.future ? (
+                <span class="size-2.5" />
+              ) : (
+                <span
+                  class={`size-2.5 rounded-sm ${shade(cell.count)}`}
+                  title={`${cell.date}: ${cell.count} ${unit}`}
+                />
+              ),
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <p class="mt-2 text-xs text-base-content/70">
+    {total}
+    {unit} in the last year
+  </p>
+</div>

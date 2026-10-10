@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 import SocialIcons from "./SocialIcons.astro";
+import OutsideWorkModal from "./OutsideWorkModal.astro";
 
 const { fullName, title, institute, description, profilePicture } =
   Astro.props;
@@ -31,6 +32,14 @@ const instituteLabel = institute?.replace(/^the\s+/i, "");
     <div class="flex gap-4">
       <SocialIcons />
     </div>
+    <button
+      type="button"
+      data-open-outside-work
+      class="mt-6 inline-block px-6 py-2 rounded-full bg-secondary text-ink hover:bg-accent transition-colors duration-200"
+    >
+      Outside Work
+    </button>
+    <OutsideWorkModal />
   </div>
   <div class="size-72 block">
     <Image
