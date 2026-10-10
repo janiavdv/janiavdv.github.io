@@ -1,0 +1,106 @@
+---
+import { outsideWork } from "@/data/outsideWork";
+import { getReadingDays } from "@/data/goodreads";
+import Goodreads from "@/assets/social-icons/goodreads-g.svg";
+import Heatmap from "./Heatmap.astro";
+
+const goodreadsUrl =
+  "https://www.goodreads.com/user/show/152478889-jania-vandevoorde";
+
+const readingDays = await getReadingDays();
+---
+
+<dialog id="outside-work-modal" class="modal">
+  <div class="modal-box max-w-3xl bg-base-100">
+    <form method="dialog">
+      <button
+        class="btn btn-sm btn-circle btn-ghost absolute right-3 top-3"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+    </form>
+    <h2 class="text-2xl md:text-3xl font-bold mb-6">
+      Outside <span class="text-secondary">Work</span> 🌸
+    </h2>
+    <div class="flex flex-col gap-6">
+      {
+        outsideWork.map((section) => (
+          <section class="rounded-lg bg-base-200 p-4 md:p-6">
+            <h3 class="text-lg md:text-xl font-bold mb-2">
+              <span aria-hidden="true">{section.emoji}</span> {section.title}
+            </h3>
+            {section.description && (
+              <p class="text-sm md:text-base">{section.description}</p>
+            )}
+            {section.bullets && section.bullets.length > 0 && (
+              <ul class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm md:text-base">
+                {section.bullets.map((bullet) => (
+                  <li>
+                    <span aria-hidden="true">{bullet.emoji}</span> {bullet.label}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {section.title === "Hobbies" && readingDays.size > 0 && (
+              <div class="mt-4">
+                <h4 class="mb-2 flex items-center gap-2 text-sm font-bold">
+                  📚 Days reading
+                  <a
+                    href={goodreadsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Goodreads"
+                    class="inline-flex size-7 items-center justify-center rounded-xl hover:bg-secondary/20 transition-all duration-300"
+                  >
+                    <Goodreads class="size-4" fill="currentColor" />
+                  </a>
+                </h4>
+                <Heatmap counts={readingDays} unit="days reading" />
+              </div>
+            )}
+            {section.links && section.links.length > 0 && (
+              <div class="mt-4 flex flex-wrap gap-3">
+                {section.links.map((link) => (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block px-4 py-2 rounded-full bg-secondary text-ink hover:bg-accent transition-colors duration-200"
+                  >
+                    <span aria-hidden="true">{link.emoji}</span> {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
+            {section.images.length > 0 && (
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                {section.images.map((image) => (
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading="lazy"
+                    class="w-full rounded-lg object-cover"
+                  />
+                ))}
+              </div>
+            )}
+          </section>
+        ))
+      }
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button aria-label="Close">close</button>
+  </form>
+</dialog>
+
+<script>
+  document.addEventListener("click", (event) => {
+    const trigger = (event.target as Element).closest("[data-open-outside-work]");
+    if (!trigger) return;
+    document
+      .querySelector<HTMLDialogElement>("#outside-work-modal")
+      ?.showModal();
+  });
+</script>
