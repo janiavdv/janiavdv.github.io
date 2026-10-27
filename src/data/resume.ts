@@ -119,6 +119,22 @@ export const education = [
 
 export const projects = [
   {
+    title: "infiniPods",
+    description:
+      'Public registry for versioned, lineage-tracked AI agent packages ("pods"), with GitHub login publishing, server-side validation, and a pluggable blob store',
+    time: "September 2026 - Present",
+    tags: [
+      "TypeScript",
+      "Node.js",
+      "Docker",
+      "S3",
+      "GitHub OAuth",
+      "Playwright",
+      "CI",
+    ],
+    extra: false,
+  },
+  {
     title: "Reflective ALFA",
     description:
       "Reflective interpreter for a functional language with first-class functions, continuations, and runtime code inspection",
