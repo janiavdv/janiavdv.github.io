@@ -122,16 +122,8 @@ export const projects = [
     title: "infiniPods",
     description:
       'Public registry for versioned, lineage-tracked AI agent packages ("pods"), with GitHub login publishing, server-side validation, and a pluggable blob store',
-    time: "September 2026 - Present",
-    tags: [
-      "TypeScript",
-      "Node.js",
-      "Docker",
-      "S3",
-      "GitHub OAuth",
-      "Playwright",
-      "CI",
-    ],
+    time: "2026",
+    tags: ["TypeScript", "Node.js"],
     extra: false,
   },
   {
