@@ -3,6 +3,9 @@ export default {
     content: ["./src/**/*.{astro,html,js,jsx,ts,tsx,css,md,mdx}"],
     theme: {
         extend: {
+            fontFamily: {
+                sans: ["'Inter Variable'", "ui-sans-serif", "system-ui", "sans-serif"],
+            },
             colors: {
                 // Fixed dark ink for text on secondary/accent fills. Both fills stay
                 // light/pastel in cupcake AND dracula, so this one value (not a

@@ -1,4 +1,5 @@
 ---
+import "@fontsource-variable/inter";
 import { ClientRouter } from "astro:transitions";
 
 import Navbar from "../components/ui/Navbar.astro";
@@ -6,7 +7,6 @@ import Head from "../components/Head.astro";
 
 import { seo, template } from "../settings";
 import Footer from "../components/ui/Footer.astro";
-import FloatingBall from "../components/ui/FloatingBall.astro";
 
 type Props = {
   title?: string;
@@ -28,12 +28,11 @@ const {
     <Head title={title} description={description} image={image} />
   </head>
   <body>
-    <FloatingBall />
     <div style="position: sticky; top: 0; z-index: 50;">
       <Navbar />
     </div>
     <main
-      class="p-8 pt-10 lg:pt-16 lg:max-w-5xl max-w-full mx-auto min-h-screen flex flex-col items-center justify-between"
+      class="px-6 pt-8 lg:pt-14 max-w-3xl w-full mx-auto min-h-screen flex flex-col justify-between"
     >
       <!-- Page content -->
       <slot />

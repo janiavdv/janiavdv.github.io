@@ -31,7 +31,7 @@ const recentWorkExperiences = experiences
 
 <Layout>
   <!-- Hero Section -->
-  <section class="flex items-center gap-12 border-b pb-12">
+  <section class="w-full pb-14">
     <Hero
       fullName={fullName}
       title={title}
@@ -42,38 +42,34 @@ const recentWorkExperiences = experiences
   </section>
 
   <!-- Recent Work Experience -->
-  <section class="py-12 border-t">
+  <section class="w-full pb-14">
     <Grid
       gridTitle="Recent Work Experience"
       gridItems={recentWorkExperiences}
     />
-    <div class="mt-8 flex justify-center">
-      <a
-        href={`${template.base}/resume`}
-        class="inline-block px-6 py-2 rounded-full bg-secondary text-ink hover:bg-accent transition-colors duration-200 text-center"
-      >
-        More Experience
-      </a>
-    </div>
+    <a
+      href={`${template.base}/resume`}
+      class="mt-4 inline-block text-sm text-base-content/70 hover:text-secondary transition-colors"
+    >
+      More Experience →
+    </a>
   </section>
 
   <!-- Recent Projects -->
-  <section class="py-12 border-t">
+  <section class="w-full pb-14">
     <Grid gridTitle="Recent Projects" gridItems={projects.slice(0, 3)} />
-    <div class="mt-8 flex justify-center">
-      <a
-        href={`${template.base}/projects`}
-        class="inline-block px-6 py-2 rounded-full bg-secondary text-ink hover:bg-accent transition-colors duration-200 text-center"
-      >
-        More Projects
-      </a>
-    </div>
+    <a
+      href={`${template.base}/projects`}
+      class="mt-4 inline-block text-sm text-base-content/70 hover:text-secondary transition-colors"
+    >
+      More Projects →
+    </a>
   </section>
 
   <!-- Interests -->
   {
     interests.length > 0 && (
-      <section class="py-12 border-b">
+      <section class="w-full pb-14">
         <Grid gridTitle="Interests" gridItems={interests} />
       </section>
     )

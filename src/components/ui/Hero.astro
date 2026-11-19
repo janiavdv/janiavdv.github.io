@@ -7,45 +7,42 @@ import OutsideWorkModal from "./OutsideWorkModal.astro";
 const { fullName, title, institute, description, profilePicture } =
   Astro.props;
 
-// "the University of Michigan" reads naturally in a sentence but not as a
-// standalone label, so drop the leading article for the eyebrow display only.
 const instituteLabel = institute?.replace(/^the\s+/i, "");
 ---
 
-<div class="flex flex-col lg:flex-row items-center gap-8">
+<div class="flex flex-col-reverse sm:flex-row sm:items-start gap-8 w-full">
   <div class="flex-1">
-    <h1 class="text-4xl font-bold mb-2">
-      Welcome! I'm <span class="text-secondary">{fullName}</span>
+    <h1 class="text-3xl md:text-4xl font-semibold tracking-tight mb-2">
+      {fullName}
     </h1>
     {
       (title || instituteLabel) && (
-        <p class="text-lg italic text-base-content/70 mb-4">
+        <p class="text-sm text-base-content/70 mb-6">
           {title}
           {title && instituteLabel && " · "}
           {instituteLabel}
         </p>
       )
     }
-    <p class="text-lg mb-6">
+    <p class="text-base leading-relaxed text-base-content/80 mb-6">
       {description}
     </p>
-    <div class="flex gap-4">
+    <div class="flex items-center gap-4 -ml-2">
       <SocialIcons />
+      <span class="h-4 w-px bg-base-300"></span>
+      <button
+        type="button"
+        data-open-outside-work
+        class="text-sm text-base-content/70 underline underline-offset-4 decoration-secondary decoration-2 hover:text-base-content transition-colors"
+      >
+        Outside work
+      </button>
     </div>
-    <button
-      type="button"
-      data-open-outside-work
-      class="mt-6 inline-block px-6 py-2 rounded-full bg-secondary text-ink hover:bg-accent transition-colors duration-200"
-    >
-      Outside Work
-    </button>
     <OutsideWorkModal />
   </div>
-  <div class="size-72 block">
-    <Image
-      src={profilePicture}
-      alt={fullName}
-      class="w-full h-full mask mask-circle size-44"
-    />
-  </div>
+  <Image
+    src={profilePicture}
+    alt={fullName}
+    class="size-28 md:size-36 rounded-full object-cover shrink-0"
+  />
 </div>
