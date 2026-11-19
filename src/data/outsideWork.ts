@@ -22,7 +22,7 @@ export const outsideWork: OutsideWorkSection[] = [
     bullets: [
       { emoji: "🏃‍♀️", label: "Running" },
       { emoji: "📚", label: "Reading" },
-      { emoji: "💎", label: "Bedazzling" },
+      { emoji: "✂️", label: "Crafting" },
       { emoji: "📓", label: "Journaling" },
       { emoji: "🏋️‍♀️", label: "Lifting weights" },
       { emoji: "🧁", label: "Baking" },
