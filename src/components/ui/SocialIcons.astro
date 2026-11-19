@@ -5,8 +5,8 @@ import LinkedIn from "@/assets/social-icons/linkedin-in.svg";
 
 import { social } from "@/settings";
 
-const iconSize = "size-6";
-const containerSize = "size-12";
+const iconSize = "size-5";
+const containerSize = "size-9";
 ---
 
 <div class="flex flex-wrap justify-between items-center">
@@ -15,7 +15,7 @@ const containerSize = "size-12";
     social.email !== "" && (
       <a
         href={`mailto:${social.email}`}
-        class={`${containerSize} inline-flex items-center justify-center rounded-xl hover:bg-secondary/20 transition-all duration-300`}
+        class={`${containerSize} inline-flex items-center justify-center rounded-lg text-base-content/70 hover:text-secondary transition-colors duration-200`}
       >
         <Envelope class={iconSize} fill="currentColor" />
       </a>
@@ -28,7 +28,7 @@ const containerSize = "size-12";
       <a
         href={social.github}
         target="_blank"
-        class={`${containerSize} inline-flex items-center justify-center rounded-xl hover:bg-secondary/20 transition-all duration-300`}
+        class={`${containerSize} inline-flex items-center justify-center rounded-lg text-base-content/70 hover:text-secondary transition-colors duration-200`}
       >
         <GitHub class={iconSize} fill="currentColor" />
       </a>
@@ -41,7 +41,7 @@ const containerSize = "size-12";
       <a
         href={social.linkedin}
         target="_blank"
-        class={`${containerSize} inline-flex items-center justify-center rounded-xl hover:bg-secondary/20 transition-all duration-300`}
+        class={`${containerSize} inline-flex items-center justify-center rounded-lg text-base-content/70 hover:text-secondary transition-colors duration-200`}
       >
         <LinkedIn class={iconSize} fill="currentColor" />
       </a>

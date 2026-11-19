@@ -9,10 +9,8 @@ const EXTRA_PROJECTS = ALL_PROJECTS.slice(6);
 ---
 
 <Layout title="Projects | Jania Vandevoorde">
-  <div class="max-w-none">
-    <div class="border-b pb-4 mb-6">
-      <h1 class="text-3xl font-bold">Technical Projects</h1>
-    </div>
+  <div class="w-full">
+    <h1 class="text-3xl font-semibold tracking-tight mb-6">Projects</h1>
     <div id="projects-grid">
       <Grid gridItems={VISIBLE_PROJECTS} />
     </div>
@@ -25,32 +23,14 @@ const EXTRA_PROJECTS = ALL_PROJECTS.slice(6);
         <Grid gridItems={EXTRA_PROJECTS} />
       </div>
     </div>
-    <div class="mt-6 flex justify-center">
+    <div class="mt-4">
       <button
         id="extra-projects-toggle"
         type="button"
-        class="group inline-flex items-center px-4 py-2 bg-secondary text-ink rounded-lg hover:bg-accent transition"
+        class="text-sm text-base-content/70 hover:text-secondary transition-colors"
         aria-controls="extra-projects-grid"
         aria-expanded="false"
       >
-        <span
-          class="inline-flex items-center justify-center w-8 h-8 bg-secondary rounded-full mr-2 transition group-hover:bg-accent"
-        >
-          <svg
-            id="extra-projects-toggle-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 transition-transform duration-200 group-hover:scale-125"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              id="extra-projects-toggle-icon-path"
-              d="M12 5v14M5 12h14"
-              class="transition stroke-ink group-hover:stroke-ink"></path>
-          </svg>
-        </span>
         <span id="extra-projects-toggle-label">Show more</span>
       </button>
     </div>
@@ -62,9 +42,6 @@ const EXTRA_PROJECTS = ALL_PROJECTS.slice(6);
     );
     const extraProjectsGrid = document.getElementById("extra-projects-grid");
     const toggleLabel = document.getElementById("extra-projects-toggle-label");
-    const toggleIconPath = document.getElementById(
-      "extra-projects-toggle-icon-path",
-    );
     let collapseTimer;
 
     if (toggle) {
@@ -102,12 +79,6 @@ const EXTRA_PROJECTS = ALL_PROJECTS.slice(6);
         }
         if (toggleLabel) {
           toggleLabel.textContent = isExpanded ? "Show less" : "Show more";
-        }
-        if (toggleIconPath) {
-          toggleIconPath.setAttribute(
-            "d",
-            isExpanded ? "M5 12h14" : "M12 5v14M5 12h14",
-          );
         }
       };
 
