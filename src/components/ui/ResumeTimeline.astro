@@ -25,26 +25,29 @@ const { elements, colored } = Astro.props;
           class:list={["py-5", { hidden: isHiddenExperience }]}
         >
           <div class="flex items-baseline justify-between gap-4">
-            {element.link ? (
-              <a
-                href={element.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-medium hover:text-secondary transition-colors"
-              >
-                {heading}
-              </a>
-            ) : (
-              <div class="font-medium">{heading}</div>
-            )}
+            <div class="font-medium">{heading}</div>
             <time class="shrink-0 text-xs font-mono text-base-content/60">
               {element.time}
             </time>
           </div>
           <div class="flex items-center gap-2 text-sm text-base-content/60">
             <span>
-              {isExperience(element) ? element.company : element.school} ·{" "}
-              {element.location}
+              {element.link ? (
+                <a
+                  href={element.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-secondary transition-colors"
+                >
+                  {isExperience(element) ? element.company : element.school}{" "}
+                  <span aria-hidden="true">↗</span>
+                </a>
+              ) : isExperience(element) ? (
+                element.company
+              ) : (
+                element.school
+              )}{" "}
+              · {element.location}
             </span>
             {!isExperience(element) &&
               "courses" in element &&

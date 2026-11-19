@@ -31,12 +31,14 @@ const { gridTitle, gridItems } = Astro.props;
   {
     gridItems.map((item) => {
       const hasLink = "link" in item && Boolean(item.link);
+      const isExperience = "company" in item && Boolean(item.company);
+      const href = hasLink && typeof item.link === "string" ? item.link : undefined;
       const content = (
         <>
           <div class="flex items-baseline justify-between gap-4">
-            <h3 class="text-base font-medium group-hover:text-secondary transition-colors">
+            <h3 class={`text-base font-medium transition-colors ${isExperience ? "" : "group-hover:text-secondary"}`}>
               {item.title}
-              {hasLink && (
+              {hasLink && !isExperience && (
                 <span
                   aria-hidden="true"
                   class="ml-1 text-base-content/40 group-hover:text-secondary"
@@ -52,7 +54,20 @@ const { gridTitle, gridItems } = Astro.props;
             )}
           </div>
           {"company" in item && item.company && (
-            <div class="text-sm text-base-content/60">{item.company}</div>
+            <div class="text-sm text-base-content/60">
+              {href ? (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-secondary transition-colors"
+                >
+                  {item.company} <span aria-hidden="true">↗</span>
+                </a>
+              ) : (
+                item.company
+              )}
+            </div>
           )}
           {"description" in item && item.description && !("level" in item && item.level) && (
             <div class="mt-1 text-sm text-base-content/70">
@@ -83,7 +98,7 @@ const { gridTitle, gridItems } = Astro.props;
 
       const isExtraProject = "extra" in item && item.extra;
 
-      return "link" in item && item.link ? (
+      return hasLink && !isExperience ? (
         <a
           href={typeof item.link === "string" ? item.link : undefined}
           class:list={["group block py-4", { hidden: isExtraProject }]}
